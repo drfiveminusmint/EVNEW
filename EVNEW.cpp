@@ -44,6 +44,8 @@
 
 #include <algorithm>
 
+#include <shlobj_core.h>
+
 namespace qt
 {
 #include <QTML.h>
@@ -889,6 +891,103 @@ int CEditor::FileSaveAs(void)
 		m_plugIn.SetFilename("");
 
 	return 1;
+}
+
+int CEditor::FileImportCSV(void) 
+{
+	MessageBox(NULL, "WIP", "Error", MB_OK | MB_ICONEXCLAMATION);
+	return 0;
+}
+
+int CEditor::FileExportCSV(void)
+{
+	// TODO let us change the export directory
+	if (m_plugIn.m_vResources[CNR_TYPE_CICN].size() > 0)
+	{
+		AskForCicnExportFormat();
+
+		if (m_iCicnExportReturnValue == -1)
+			return 0;
+		else if (m_iCicnExportReturnValue == 0)
+			m_plugIn.SetCicnSaveOptions(0, m_szCicnExportSubdirectory, m_szCicnExportFilenamePrefix, m_szCicnExportMaskSubdirectory, m_szCicnExportMaskFilenamePrefix);
+		else
+			m_plugIn.SetCicnSaveOptions(1, m_szCicnExportSubdirectory, m_szCicnExportFilenamePrefix, m_szCicnExportMaskSubdirectory, m_szCicnExportMaskFilenamePrefix);
+	}
+
+	if (m_plugIn.m_vResources[CNR_TYPE_PICT].size() > 0)
+	{
+		AskForPictExportFormat();
+
+		if (m_iPictExportReturnValue == -1)
+			return 0;
+		else if (m_iPictExportReturnValue == 0)
+			m_plugIn.SetPictSaveOptions(0, m_szPictExportSubdirectory, m_szPictExportFilenamePrefix, m_iPictExportType);
+		else
+			m_plugIn.SetPictSaveOptions(1, m_szPictExportSubdirectory, m_szPictExportFilenamePrefix, m_iPictExportType);
+	}
+
+	if (m_plugIn.m_vResources[CNR_TYPE_RLE8].size() > 0)
+	{
+		AskForRle8ExportFormat();
+
+		if (m_iRleExportReturnValue == -1)
+			return 0;
+		else if (m_iRleExportReturnValue == 0)
+			m_plugIn.SetRle8SaveOptions(0, m_szRleExportSubdirectory, m_szRleExportFilenamePrefix, m_szRleExportMaskSubdirectory, m_szRleExportMaskFilenamePrefix, m_iRleExportImageFileType, m_iRleExportMaskFileType, m_iRleExportFramesPerRow);
+		else
+			m_plugIn.SetRle8SaveOptions(1, m_szRleExportSubdirectory, m_szRleExportFilenamePrefix, m_szRleExportMaskSubdirectory, m_szRleExportMaskFilenamePrefix, m_iRleExportImageFileType, m_iRleExportMaskFileType, m_iRleExportFramesPerRow);
+	}
+
+	if (m_plugIn.m_vResources[CNR_TYPE_RLED].size() > 0)
+	{
+		AskForRleDExportFormat();
+
+		if (m_iRleExportReturnValue == -1)
+			return 0;
+		else if (m_iRleExportReturnValue == 0)
+			m_plugIn.SetRleDSaveOptions(0, m_szRleExportSubdirectory, m_szRleExportFilenamePrefix, m_szRleExportMaskSubdirectory, m_szRleExportMaskFilenamePrefix, m_iRleExportImageFileType, m_iRleExportMaskFileType, m_iRleExportFramesPerRow);
+		else
+			m_plugIn.SetRleDSaveOptions(1, m_szRleExportSubdirectory, m_szRleExportFilenamePrefix, m_szRleExportMaskSubdirectory, m_szRleExportMaskFilenamePrefix, m_iRleExportImageFileType, m_iRleExportMaskFileType, m_iRleExportFramesPerRow);
+	}
+
+	if (m_plugIn.m_vResources[CNR_TYPE_SND].size() > 0)
+	{
+		AskForSndExportFormat();
+
+		if (m_iSndExportReturnValue == -1)
+			return 0;
+		else if (m_iSndExportReturnValue == 0)
+			m_plugIn.SetSndSaveOptions(0, m_szSndExportSubdirectory, m_szSndExportFilenamePrefix);
+		else
+			m_plugIn.SetSndSaveOptions(1, m_szSndExportSubdirectory, m_szSndExportFilenamePrefix);
+	}
+
+	// TODO NOT THIS
+	// Get our export folder
+	
+	TCHAR szFilename[MAX_PATH];
+	BROWSEINFO bi = { 0 };
+	bi.hwndOwner = m_dialogMain.GetHWND();
+	bi.pidlRoot = NULL;
+	bi.pszDisplayName = szFilename;
+	bi.lpszTitle = "Choose an export destination";
+	bi.ulFlags = 0;
+	bi.lpfn = NULL;
+	bi.lParam = 0;
+	
+	// get our Item ID list
+	PIDLIST_ABSOLUTE id = SHBrowseForFolder(&bi);
+	if (id != NULL)
+		SHGetPathFromIDList(id, szFilename);	// Combine with our display name to get a path
+	else
+		return 0;
+
+	if (m_plugIn.ExportToCSV(szFilename, &m_dialogMain) == 0)
+	{
+		MessageBox(NULL, "Something went wrong exporting to CSV", "Error", MB_OK | MB_ICONEXCLAMATION);
+	}
+	
+	return 0;
 }
 
 /*int CEditor::FileTestPlugIn(void)
@@ -1822,6 +1921,14 @@ BOOL CEditor::MainDialogProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 			else if(iControlID == IDM_FILE_SAVEAS)
 			{
 				pEditor->FileSaveAs();
+			}
+			else if (iControlID == ID_FILE_IMPORTFROMCSV)
+			{
+				pEditor->FileImportCSV();
+			}
+			else if (iControlID == ID_FILE_EXPORTTOCSV)
+			{
+				pEditor->FileExportCSV();
 			}
 //			else if(iControlID == IDM_FILE_TESTPLUGIN)
 //			{

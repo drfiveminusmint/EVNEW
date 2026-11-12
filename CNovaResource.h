@@ -117,9 +117,9 @@ public:
 	virtual int SaveDirect(std::ostream & output);
 	virtual int LoadDirect(std::istream & input, int iSize);
 
-	virtual int SaveToText(std::ostream & output);
+	virtual int SaveToText(std::ostream & output, char delim);
 	virtual int SaveToTextEx(std::ostream & output, std::string & szFilePath, std::string & szFilename1, std::string & szFilename2, int iParam);
-	virtual int LoadFromText(std::istream & input);
+	virtual int LoadFromText(std::istream & input, char delim);
 	virtual int LoadFromTextEx(std::istream & input, std::string & szFilePath);
 
 	virtual int Initialize(HWND hwnd) = 0;

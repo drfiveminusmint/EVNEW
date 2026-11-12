@@ -280,68 +280,68 @@ int CIntfResource::SwapEndians(void)
 	return 1;
 }
 
-int CIntfResource::SaveToText(std::ostream & output)
+int CIntfResource::SaveToText(std::ostream & output, char delim)
 {
-	PrintHex32Field(output, (char *)&m_iBrightText, '\t');
-	PrintHex32Field(output, (char *)&m_iDimText,    '\t');
+	PrintHex32Field(output, (char *)&m_iBrightText, delim);
+	PrintHex32Field(output, (char *)&m_iDimText,    delim);
 
-	output << m_iRadarX1          << '\t'
-		   << m_iRadarY1          << '\t'
-		   << m_iRadarX2          << '\t'
-		   << m_iRadarY2          << '\t';
+	output << m_iRadarX1          << delim
+		   << m_iRadarY1          << delim
+		   << m_iRadarX2          << delim
+		   << m_iRadarY2          << delim;
 
-	PrintHex32Field(output, (char *)&m_iBrightRadar, '\t');
-	PrintHex32Field(output, (char *)&m_iDimRadar,    '\t');
+	PrintHex32Field(output, (char *)&m_iBrightRadar, delim);
+	PrintHex32Field(output, (char *)&m_iDimRadar,    delim);
 
-	output << m_iShieldX1         << '\t'
-		   << m_iShieldY1         << '\t'
-		   << m_iShieldX2         << '\t'
-		   << m_iShieldY2         << '\t';
+	output << m_iShieldX1         << delim
+		   << m_iShieldY1         << delim
+		   << m_iShieldX2         << delim
+		   << m_iShieldY2         << delim;
 
-	PrintHex32Field(output, (char *)&m_iShieldColor, '\t');
+	PrintHex32Field(output, (char *)&m_iShieldColor, delim);
 
-	output << m_iArmorX1          << '\t'
-		   << m_iArmorY1          << '\t'
-		   << m_iArmorX2          << '\t'
-		   << m_iArmorY2          << '\t';
+	output << m_iArmorX1          << delim
+		   << m_iArmorY1          << delim
+		   << m_iArmorX2          << delim
+		   << m_iArmorY2          << delim;
 
-	PrintHex32Field(output, (char *)&m_iArmorColor, '\t');
+	PrintHex32Field(output, (char *)&m_iArmorColor, delim);
 
-	output << m_iFuelX1           << '\t'
-		   << m_iFuelY1           << '\t'
-		   << m_iFuelX2           << '\t'
-		   << m_iFuelY2           << '\t';
+	output << m_iFuelX1           << delim
+		   << m_iFuelY1           << delim
+		   << m_iFuelX2           << delim
+		   << m_iFuelY2           << delim;
 
-	PrintHex32Field(output, (char *)&m_iFuelFull,    '\t');
-	PrintHex32Field(output, (char *)&m_iFuelPartial, '\t');
+	PrintHex32Field(output, (char *)&m_iFuelFull,    delim);
+	PrintHex32Field(output, (char *)&m_iFuelPartial, delim);
 
-	output << m_iNavigationX1     << '\t'
-		   << m_iNavigationY1     << '\t'
-		   << m_iNavigationX2     << '\t'
-		   << m_iNavigationY2     << '\t'
-		   << m_iWeaponX1         << '\t'
-		   << m_iWeaponY1         << '\t'
-		   << m_iWeaponX2         << '\t'
-		   << m_iWeaponY2         << '\t'
-		   << m_iTargetX1         << '\t'
-		   << m_iTargetY1         << '\t'
-		   << m_iTargetX2         << '\t'
-		   << m_iTargetY2         << '\t'
-		   << m_iCargoX1          << '\t'
-		   << m_iCargoY1          << '\t'
-		   << m_iCargoX2          << '\t'
-		   << m_iCargoY2          << '\t';
+	output << m_iNavigationX1     << delim
+		   << m_iNavigationY1     << delim
+		   << m_iNavigationX2     << delim
+		   << m_iNavigationY2     << delim
+		   << m_iWeaponX1         << delim
+		   << m_iWeaponY1         << delim
+		   << m_iWeaponX2         << delim
+		   << m_iWeaponY2         << delim
+		   << m_iTargetX1         << delim
+		   << m_iTargetY1         << delim
+		   << m_iTargetX2         << delim
+		   << m_iTargetY2         << delim
+		   << m_iCargoX1          << delim
+		   << m_iCargoY1          << delim
+		   << m_iCargoX2          << delim
+		   << m_iCargoY2          << delim;
 
-	PrintTextField(output, m_szStatusFont, '\t');
+	PrintTextField(output, m_szStatusFont, delim);
 
-	output << m_iStatusFontSize   << '\t'
-		   << m_iSubtitleFontSize << '\t'
-		   << m_iBackground       << '\t';
+	output << m_iStatusFontSize   << delim
+		   << m_iSubtitleFontSize << delim
+		   << m_iBackground       << delim;
 
 	return 1;
 }
 
-int CIntfResource::LoadFromText(std::istream & input)
+int CIntfResource::LoadFromText(std::istream & input, char delim)
 {
 	ReadHex32Field(input, (char *)&m_iBrightText);
 	ReadHex32Field(input, (char *)&m_iDimText);

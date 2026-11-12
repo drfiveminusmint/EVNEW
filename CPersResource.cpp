@@ -236,51 +236,51 @@ int CPersResource::SwapEndians(void)
 	return 1;
 }
 
-int CPersResource::SaveToText(std::ostream & output)
+int CPersResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iSystem         << '\t'
-		   << m_iGovernment     << '\t'
-		   << m_iAIType         << '\t'
-		   << m_iAggressiveness << '\t'
-		   << m_iCowardice      << '\t'
-		   << m_iShipType       << '\t'
-		   << m_iCredits        << '\t'
-		   << m_iShieldMod      << '\t'
-		   << m_iHailPicture    << '\t'
-		   << m_iCommQuote      << '\t'
-		   << m_iHailQuote      << '\t'
-		   << m_iLinkedMission  << '\t';
+	output << m_iSystem         << delim
+		   << m_iGovernment     << delim
+		   << m_iAIType         << delim
+		   << m_iAggressiveness << delim
+		   << m_iCowardice      << delim
+		   << m_iShipType       << delim
+		   << m_iCredits        << delim
+		   << m_iShieldMod      << delim
+		   << m_iHailPicture    << delim
+		   << m_iCommQuote      << delim
+		   << m_iHailQuote      << delim
+		   << m_iLinkedMission  << delim;
 
-	PrintTextField(output, m_szActiveOn, '\t');
+	PrintTextField(output, m_szActiveOn, delim);
 
-	output << m_iGrantClass  << '\t'
-		   << m_iGrantCount  << '\t'
-		   << m_iGrantRandom << '\t';
+	output << m_iGrantClass  << delim
+		   << m_iGrantCount  << delim
+		   << m_iGrantRandom << delim;
 
-	PrintTextField(output, m_szSubtitle, '\t');
+	PrintTextField(output, m_szSubtitle, delim);
 
-	PrintHex32Field(output, (char *)&m_iColor, '\t');
+	PrintHex32Field(output, (char *)&m_iColor, delim);
 
-	output << m_iWeaponTypes[0]  << '\t'
-		   << m_iWeaponTypes[1]  << '\t'
-		   << m_iWeaponTypes[2]  << '\t'
-		   << m_iWeaponTypes[3]  << '\t'
-		   << m_iWeaponCounts[0] << '\t'
-		   << m_iWeaponCounts[1] << '\t'
-		   << m_iWeaponCounts[2] << '\t'
-		   << m_iWeaponCounts[3] << '\t'
-		   << m_iWeaponAmmos[0]  << '\t'
-		   << m_iWeaponAmmos[1]  << '\t'
-		   << m_iWeaponAmmos[2]  << '\t'
-		   << m_iWeaponAmmos[3]  << '\t';
+	output << m_iWeaponTypes[0]  << delim
+		   << m_iWeaponTypes[1]  << delim
+		   << m_iWeaponTypes[2]  << delim
+		   << m_iWeaponTypes[3]  << delim
+		   << m_iWeaponCounts[0] << delim
+		   << m_iWeaponCounts[1] << delim
+		   << m_iWeaponCounts[2] << delim
+		   << m_iWeaponCounts[3] << delim
+		   << m_iWeaponAmmos[0]  << delim
+		   << m_iWeaponAmmos[1]  << delim
+		   << m_iWeaponAmmos[2]  << delim
+		   << m_iWeaponAmmos[3]  << delim;
 
-	PrintHex16Field(output, (char *)&m_iFlags1, '\t');
-	PrintHex16Field(output, (char *)&m_iFlags2, '\t');
+	PrintHex16Field(output, (char *)&m_iFlags1, delim);
+	PrintHex16Field(output, (char *)&m_iFlags2, delim);
 
 	return 1;
 }
 
-int CPersResource::LoadFromText(std::istream & input)
+int CPersResource::LoadFromText(std::istream & input, char delim)
 {
 	input >> m_iSystem
 		  >> m_iGovernment

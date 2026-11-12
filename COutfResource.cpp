@@ -218,50 +218,50 @@ int COutfResource::SwapEndians(void)
 	return 1;
 }
 
-int COutfResource::SaveToText(std::ostream & output)
+int COutfResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iDisplayWeight << '\t'
-		   << m_iMass          << '\t'
-		   << m_iTechLevel     << '\t'
-		   << m_iModTypes[0]   << '\t'
-		   << m_iModValues[0]  << '\t'
-		   << m_iModTypes[1]   << '\t'
-		   << m_iModValues[1]  << '\t'
-		   << m_iModTypes[2]   << '\t'
-		   << m_iModValues[2]  << '\t'
-		   << m_iModTypes[3]   << '\t'
-		   << m_iModValues[3]  << '\t'
-		   << m_iMaxCount      << '\t'
-		   << m_iCost          << '\t'
-		   << m_iItemClass     << '\t';
+	output << m_iDisplayWeight << delim
+		   << m_iMass          << delim
+		   << m_iTechLevel     << delim
+		   << m_iModTypes[0]   << delim
+		   << m_iModValues[0]  << delim
+		   << m_iModTypes[1]   << delim
+		   << m_iModValues[1]  << delim
+		   << m_iModTypes[2]   << delim
+		   << m_iModValues[2]  << delim
+		   << m_iModTypes[3]   << delim
+		   << m_iModValues[3]  << delim
+		   << m_iMaxCount      << delim
+		   << m_iCost          << delim
+		   << m_iItemClass     << delim;
 
 	char c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
 
-	PrintHex16Field(output, m_cScanMask, '\t');
+	PrintHex16Field(output, m_cScanMask, delim);
 
 	c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
 
-	output << m_iBuyRandom << '\t';
+	output << m_iBuyRandom << delim;
 
-	PrintTextField(output, m_szAvailability, '\t');
-	PrintTextField(output, m_szOnPurchase,   '\t');
-	PrintTextField(output, m_szOnSell,       '\t');
+	PrintTextField(output, m_szAvailability, delim);
+	PrintTextField(output, m_szOnPurchase,   delim);
+	PrintTextField(output, m_szOnSell,       delim);
 
-	PrintHex64Field(output, m_cContribute, '\t');
-	PrintHex64Field(output, m_cRequire,    '\t');
+	PrintHex64Field(output, m_cContribute, delim);
+	PrintHex64Field(output, m_cRequire,    delim);
 
-	PrintTextField(output, m_szShortName,           '\t');
-	PrintTextField(output, m_szLowerCaseName,       '\t');
-	PrintTextField(output, m_szLowerCasePluralName, '\t');
+	PrintTextField(output, m_szShortName,           delim);
+	PrintTextField(output, m_szLowerCaseName,       delim);
+	PrintTextField(output, m_szLowerCasePluralName, delim);
 
-	output << m_iRequiredGovernment << '\t';
+	output << m_iRequiredGovernment << delim;
 
-	PrintHex16Field(output, (char *)&m_iFlags, '\t');
+	PrintHex16Field(output, (char *)&m_iFlags, delim);
 
 	return 1;
 }
 
-int COutfResource::LoadFromText(std::istream & input)
+int COutfResource::LoadFromText(std::istream & input, char delim)
 {
 	input >> m_iDisplayWeight
 		  >> m_iMass

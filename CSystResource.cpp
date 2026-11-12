@@ -366,94 +366,94 @@ int CSystResource::SwapEndians(void)
 	return 1;
 }
 
-int CSystResource::SaveToText(std::ostream & output)
+int CSystResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iXPosition              << '\t'
-		   << m_iYPosition              << '\t'
-		   << m_iHyperlinks[0]          << '\t'
-		   << m_iHyperlinks[1]          << '\t'
-		   << m_iHyperlinks[2]          << '\t'
-		   << m_iHyperlinks[3]          << '\t'
-		   << m_iHyperlinks[4]          << '\t'
-		   << m_iHyperlinks[5]          << '\t'
-		   << m_iHyperlinks[6]          << '\t'
-		   << m_iHyperlinks[7]          << '\t'
-		   << m_iHyperlinks[8]          << '\t'
-		   << m_iHyperlinks[9]          << '\t'
-		   << m_iHyperlinks[10]         << '\t'
-		   << m_iHyperlinks[11]         << '\t'
-		   << m_iHyperlinks[12]         << '\t'
-		   << m_iHyperlinks[13]         << '\t'
-		   << m_iHyperlinks[14]         << '\t'
-		   << m_iHyperlinks[15]         << '\t'
-		   << m_iStellars[0]            << '\t'
-		   << m_iStellars[1]            << '\t'
-		   << m_iStellars[2]            << '\t'
-		   << m_iStellars[3]            << '\t'
-		   << m_iStellars[4]            << '\t'
-		   << m_iStellars[5]            << '\t'
-		   << m_iStellars[6]            << '\t'
-		   << m_iStellars[7]            << '\t'
-		   << m_iStellars[8]            << '\t'
-		   << m_iStellars[9]            << '\t'
-		   << m_iStellars[10]           << '\t'
-		   << m_iStellars[11]           << '\t'
-		   << m_iStellars[12]           << '\t'
-		   << m_iStellars[13]           << '\t'
-		   << m_iStellars[14]           << '\t'
-		   << m_iStellars[15]           << '\t'
-		   << m_iDudeTypes[0]           << '\t'
-		   << m_iDudeTypes[1]           << '\t'
-		   << m_iDudeTypes[2]           << '\t'
-		   << m_iDudeTypes[3]           << '\t'
-		   << m_iDudeTypes[4]           << '\t'
-		   << m_iDudeTypes[5]           << '\t'
-		   << m_iDudeTypes[6]           << '\t'
-		   << m_iDudeTypes[7]           << '\t'
-		   << m_iDudeProbabilities[0]   << '\t'
-		   << m_iDudeProbabilities[1]   << '\t'
-		   << m_iDudeProbabilities[2]   << '\t'
-		   << m_iDudeProbabilities[3]   << '\t'
-		   << m_iDudeProbabilities[4]   << '\t'
-		   << m_iDudeProbabilities[5]   << '\t'
-		   << m_iDudeProbabilities[6]   << '\t'
-		   << m_iDudeProbabilities[7]   << '\t'
-		   << m_iNumShips               << '\t'
-		   << m_iGovernment             << '\t'
-		   << m_iMessageBuoy            << '\t'
-		   << m_iNumAsteroids           << '\t'
-		   << m_iInterference           << '\t'
-		   << m_iPersons[0]             << '\t'
-		   << m_iPersons[1]             << '\t'
-		   << m_iPersons[2]             << '\t'
-		   << m_iPersons[3]             << '\t'
-		   << m_iPersons[4]             << '\t'
-		   << m_iPersons[5]             << '\t'
-		   << m_iPersons[6]             << '\t'
-		   << m_iPersons[7]             << '\t'
-		   << m_iPersonProbabilities[0] << '\t'
-		   << m_iPersonProbabilities[1] << '\t'
-		   << m_iPersonProbabilities[2] << '\t'
-		   << m_iPersonProbabilities[3] << '\t'
-		   << m_iPersonProbabilities[4] << '\t'
-		   << m_iPersonProbabilities[5] << '\t'
-		   << m_iPersonProbabilities[6] << '\t'
-		   << m_iPersonProbabilities[7] << '\t';
+	output << m_iXPosition              << delim
+		   << m_iYPosition              << delim
+		   << m_iHyperlinks[0]          << delim
+		   << m_iHyperlinks[1]          << delim
+		   << m_iHyperlinks[2]          << delim
+		   << m_iHyperlinks[3]          << delim
+		   << m_iHyperlinks[4]          << delim
+		   << m_iHyperlinks[5]          << delim
+		   << m_iHyperlinks[6]          << delim
+		   << m_iHyperlinks[7]          << delim
+		   << m_iHyperlinks[8]          << delim
+		   << m_iHyperlinks[9]          << delim
+		   << m_iHyperlinks[10]         << delim
+		   << m_iHyperlinks[11]         << delim
+		   << m_iHyperlinks[12]         << delim
+		   << m_iHyperlinks[13]         << delim
+		   << m_iHyperlinks[14]         << delim
+		   << m_iHyperlinks[15]         << delim
+		   << m_iStellars[0]            << delim
+		   << m_iStellars[1]            << delim
+		   << m_iStellars[2]            << delim
+		   << m_iStellars[3]            << delim
+		   << m_iStellars[4]            << delim
+		   << m_iStellars[5]            << delim
+		   << m_iStellars[6]            << delim
+		   << m_iStellars[7]            << delim
+		   << m_iStellars[8]            << delim
+		   << m_iStellars[9]            << delim
+		   << m_iStellars[10]           << delim
+		   << m_iStellars[11]           << delim
+		   << m_iStellars[12]           << delim
+		   << m_iStellars[13]           << delim
+		   << m_iStellars[14]           << delim
+		   << m_iStellars[15]           << delim
+		   << m_iDudeTypes[0]           << delim
+		   << m_iDudeTypes[1]           << delim
+		   << m_iDudeTypes[2]           << delim
+		   << m_iDudeTypes[3]           << delim
+		   << m_iDudeTypes[4]           << delim
+		   << m_iDudeTypes[5]           << delim
+		   << m_iDudeTypes[6]           << delim
+		   << m_iDudeTypes[7]           << delim
+		   << m_iDudeProbabilities[0]   << delim
+		   << m_iDudeProbabilities[1]   << delim
+		   << m_iDudeProbabilities[2]   << delim
+		   << m_iDudeProbabilities[3]   << delim
+		   << m_iDudeProbabilities[4]   << delim
+		   << m_iDudeProbabilities[5]   << delim
+		   << m_iDudeProbabilities[6]   << delim
+		   << m_iDudeProbabilities[7]   << delim
+		   << m_iNumShips               << delim
+		   << m_iGovernment             << delim
+		   << m_iMessageBuoy            << delim
+		   << m_iNumAsteroids           << delim
+		   << m_iInterference           << delim
+		   << m_iPersons[0]             << delim
+		   << m_iPersons[1]             << delim
+		   << m_iPersons[2]             << delim
+		   << m_iPersons[3]             << delim
+		   << m_iPersons[4]             << delim
+		   << m_iPersons[5]             << delim
+		   << m_iPersons[6]             << delim
+		   << m_iPersons[7]             << delim
+		   << m_iPersonProbabilities[0] << delim
+		   << m_iPersonProbabilities[1] << delim
+		   << m_iPersonProbabilities[2] << delim
+		   << m_iPersonProbabilities[3] << delim
+		   << m_iPersonProbabilities[4] << delim
+		   << m_iPersonProbabilities[5] << delim
+		   << m_iPersonProbabilities[6] << delim
+		   << m_iPersonProbabilities[7] << delim;
 
-	PrintTextField(output, m_szVisibility, '\t');
+	PrintTextField(output, m_szVisibility, delim);
 
-	output << m_iBackgroundColor        << '\t'
-		   << m_iMurkiness              << '\t'
-		   << m_iReinforcementFleet     << '\t'
-		   << m_iReinforcementTime      << '\t'
-		   << m_iReinforcementInterval  << '\t';
+	output << m_iBackgroundColor        << delim
+		   << m_iMurkiness              << delim
+		   << m_iReinforcementFleet     << delim
+		   << m_iReinforcementTime      << delim
+		   << m_iReinforcementInterval  << delim;
 
-	PrintHex16Field(output, (char *)&m_iAsteroidTypes, '\t');
+	PrintHex16Field(output, (char *)&m_iAsteroidTypes, delim);
 
 	return 1;
 }
 
-int CSystResource::LoadFromText(std::istream & input)
+int CSystResource::LoadFromText(std::istream & input, char delim)
 {
 	input >> m_iXPosition
 		  >> m_iYPosition

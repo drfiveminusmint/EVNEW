@@ -323,76 +323,76 @@ int CMisnResource::SwapEndians(void)
 	return 1;
 }
 
-int CMisnResource::SaveToText(std::ostream & output)
+int CMisnResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iAvailableStellar  << '\t'
-		   << m_iAvailableLocation << '\t'
-		   << m_iAvailableRecord   << '\t'
-		   << m_iAvailableRating   << '\t'
-		   << m_iAvailableRandom   << '\t'
-		   << m_iTravelStellar     << '\t'
-		   << m_iReturnStellar     << '\t'
-		   << m_iCargoType         << '\t'
-		   << m_iCargoAmount       << '\t'
-		   << m_iCargoPickup       << '\t'
-		   << m_iCargoDropoff      << '\t';
+	output << m_iAvailableStellar  << delim
+		   << m_iAvailableLocation << delim
+		   << m_iAvailableRecord   << delim
+		   << m_iAvailableRating   << delim
+		   << m_iAvailableRandom   << delim
+		   << m_iTravelStellar     << delim
+		   << m_iReturnStellar     << delim
+		   << m_iCargoType         << delim
+		   << m_iCargoAmount       << delim
+		   << m_iCargoPickup       << delim
+		   << m_iCargoDropoff      << delim;
 
 	char c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
 
-	PrintHex16Field(output, m_cScanMask, '\t');
+	PrintHex16Field(output, m_cScanMask, delim);
 
 	c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
 
-	output << m_iPayValue             << '\t'
-		   << m_iShipCount            << '\t'
-		   << m_iShipSystem           << '\t'
-		   << m_iShipDude             << '\t'
-		   << m_iShipGoal             << '\t'
-		   << m_iShipBehavior         << '\t'
-		   << m_iShipName             << '\t'
-		   << m_iShipStart            << '\t'
-		   << m_iCompletionGovernment << '\t'
-		   << m_iCompletionReward     << '\t'
-		   << m_iShipSubtitle         << '\t'
-		   << m_iBriefingDesc         << '\t'
-		   << m_iQuickBriefDesc       << '\t'
-		   << m_iLoadCargoDesc        << '\t'
-		   << m_iDropoffCargoDesc     << '\t'
-		   << m_iCompletionDesc       << '\t'
-		   << m_iFailDesc             << '\t'
-		   << m_iShipDoneDesc         << '\t'
-		   << m_iRefuseDesc           << '\t'
-		   << m_iTimeLimit            << '\t'
-		   << m_iAuxShipCount         << '\t'
-		   << m_iAuxShipDude          << '\t'
-		   << m_iAuxShipSyst          << '\t'
-		   << m_iAvailableShipType    << '\t';
+	output << m_iPayValue             << delim
+		   << m_iShipCount            << delim
+		   << m_iShipSystem           << delim
+		   << m_iShipDude             << delim
+		   << m_iShipGoal             << delim
+		   << m_iShipBehavior         << delim
+		   << m_iShipName             << delim
+		   << m_iShipStart            << delim
+		   << m_iCompletionGovernment << delim
+		   << m_iCompletionReward     << delim
+		   << m_iShipSubtitle         << delim
+		   << m_iBriefingDesc         << delim
+		   << m_iQuickBriefDesc       << delim
+		   << m_iLoadCargoDesc        << delim
+		   << m_iDropoffCargoDesc     << delim
+		   << m_iCompletionDesc       << delim
+		   << m_iFailDesc             << delim
+		   << m_iShipDoneDesc         << delim
+		   << m_iRefuseDesc           << delim
+		   << m_iTimeLimit            << delim
+		   << m_iAuxShipCount         << delim
+		   << m_iAuxShipDude          << delim
+		   << m_iAuxShipSyst          << delim
+		   << m_iAvailableShipType    << delim;
 
-	PrintTextField(output, m_szAvailableBits, '\t');
-	PrintTextField(output, m_szOnAccept,      '\t');
-	PrintTextField(output, m_szOnRefuse,      '\t');
-	PrintTextField(output, m_szOnSuccess,     '\t');
-	PrintTextField(output, m_szOnFailure,     '\t');
-	PrintTextField(output, m_szOnAbort,       '\t');
-	PrintTextField(output, m_szOnShipDone,    '\t');
+	PrintTextField(output, m_szAvailableBits, delim);
+	PrintTextField(output, m_szOnAccept,      delim);
+	PrintTextField(output, m_szOnRefuse,      delim);
+	PrintTextField(output, m_szOnSuccess,     delim);
+	PrintTextField(output, m_szOnFailure,     delim);
+	PrintTextField(output, m_szOnAbort,       delim);
+	PrintTextField(output, m_szOnShipDone,    delim);
 
-	PrintHex64Field(output, m_cRequire, '\t');
+	PrintHex64Field(output, m_cRequire, delim);
 
-	output << m_iDateIncrement << '\t';
+	output << m_iDateIncrement << delim;
 
-	PrintTextField(output, m_szAcceptButton, '\t');
-	PrintTextField(output, m_szRefuseButton, '\t');
+	PrintTextField(output, m_szAcceptButton, delim);
+	PrintTextField(output, m_szRefuseButton, delim);
 
-	output << m_iDisplayWeight << '\t'
-		   << m_iCanAbort      << '\t';
+	output << m_iDisplayWeight << delim
+		   << m_iCanAbort      << delim;
 
-	PrintHex16Field(output, (char *)&m_iFlags1, '\t');
-	PrintHex16Field(output, (char *)&m_iFlags2, '\t');
+	PrintHex16Field(output, (char *)&m_iFlags1, delim);
+	PrintHex16Field(output, (char *)&m_iFlags2, delim);
 
 	return 1;
 }
 
-int CMisnResource::LoadFromText(std::istream & input)
+int CMisnResource::LoadFromText(std::istream & input, char delim)
 {
 	input >> m_iAvailableStellar
 		  >> m_iAvailableLocation

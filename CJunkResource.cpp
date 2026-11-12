@@ -181,43 +181,43 @@ int CJunkResource::SwapEndians(void)
 	return 1;
 }
 
-int CJunkResource::SaveToText(std::ostream & output)
+int CJunkResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iSoldAt[0]   << '\t'
-		   << m_iSoldAt[1]   << '\t'
-		   << m_iSoldAt[2]   << '\t'
-		   << m_iSoldAt[3]   << '\t'
-		   << m_iSoldAt[4]   << '\t'
-		   << m_iSoldAt[5]   << '\t'
-		   << m_iSoldAt[6]   << '\t'
-		   << m_iSoldAt[7]   << '\t'
-		   << m_iBoughtAt[0] << '\t'
-		   << m_iBoughtAt[1] << '\t'
-		   << m_iBoughtAt[2] << '\t'
-		   << m_iBoughtAt[3] << '\t'
-		   << m_iBoughtAt[4] << '\t'
-		   << m_iBoughtAt[5] << '\t'
-		   << m_iBoughtAt[6] << '\t'
-		   << m_iBoughtAt[7] << '\t'
-		   << m_iBasePrice   << '\t';
+	output << m_iSoldAt[0]   << delim
+		   << m_iSoldAt[1]   << delim
+		   << m_iSoldAt[2]   << delim
+		   << m_iSoldAt[3]   << delim
+		   << m_iSoldAt[4]   << delim
+		   << m_iSoldAt[5]   << delim
+		   << m_iSoldAt[6]   << delim
+		   << m_iSoldAt[7]   << delim
+		   << m_iBoughtAt[0] << delim
+		   << m_iBoughtAt[1] << delim
+		   << m_iBoughtAt[2] << delim
+		   << m_iBoughtAt[3] << delim
+		   << m_iBoughtAt[4] << delim
+		   << m_iBoughtAt[5] << delim
+		   << m_iBoughtAt[6] << delim
+		   << m_iBoughtAt[7] << delim
+		   << m_iBasePrice   << delim;
 
 	char c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
 
-	PrintHex16Field(output, m_cScanMask, '\t');
+	PrintHex16Field(output, m_cScanMask, delim);
 
 	c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
 
-	PrintTextField(output, m_szLowerCaseName, '\t');
-	PrintTextField(output, m_szAbbreviation,  '\t');
-	PrintTextField(output, m_szBuyOn,         '\t');
-	PrintTextField(output, m_szSellOn,        '\t');
+	PrintTextField(output, m_szLowerCaseName, delim);
+	PrintTextField(output, m_szAbbreviation,  delim);
+	PrintTextField(output, m_szBuyOn,         delim);
+	PrintTextField(output, m_szSellOn,        delim);
 
-	PrintHex16Field(output, (char *)&m_iFlags, '\t');
+	PrintHex16Field(output, (char *)&m_iFlags, delim);
 
 	return 1;
 }
 
-int CJunkResource::LoadFromText(std::istream & input)
+int CJunkResource::LoadFromText(std::istream & input, char delim)
 {
 	input >> m_iSoldAt[0]
 		  >> m_iSoldAt[1]

@@ -403,7 +403,7 @@ int CPlugIn::Load(char *szFilename, CWindow *pWndParent)
 
 						if(g_iResourceCanLoadSaveText[i])
 						{
-							if(m_vResources[i][m_vResources[i].size() - 1]->LoadFromText(filein) == 0)
+							if(m_vResources[i][m_vResources[i].size() - 1]->LoadFromText(filein, '\t') == 0)
 								iError = 1;
 						}
 						else
@@ -1022,13 +1022,14 @@ int CPlugIn::Save(CWindow *pWndParent)
 				}
 				else if(i == CNR_TYPE_SND)
 				{
+					
 					szImageOrSoundFilename1 = GenerateFilename(m_szSndSubdirectory, m_szSndFilenamePrefix, ".wav", m_vResources[i][j]->GetID());
-
+					MessageBox(NULL, szImageOrSoundFilename1.c_str(), "Debug", MB_OK | MB_ICONEXCLAMATION);
 					m_vResources[i][j]->SaveToTextEx(fileout, std::string(m_szFilePath), szImageOrSoundFilename1, std::string(""), 0);
 				}
 				else
 				{
-					m_vResources[i][j]->SaveToText(fileout);
+					m_vResources[i][j]->SaveToText(fileout, '\t');
 				}
 
 				fileout << "\"EOR\"\n";
@@ -1301,6 +1302,174 @@ int CPlugIn::Save(CWindow *pWndParent)
 	{
 		m_wndLoading.Destroy();
 	}
+
+	return 1;
+}
+
+int CPlugIn::ExportToCSV(char* szDirectory, CWindow* pWndParent)
+{
+	if (strcmp(szDirectory, "") == 0)
+		return 0;
+
+	int iSaveFlags = std::ios::out | std::ios::trunc;
+
+	m_iFileOffset = 0;
+
+	std::string szBuffer;
+
+	CErrorLog* pLog = CErrorLog::GetCurrentErrorLog();
+
+	HWND hwndSavingText;
+	HWND hwndProgressBar;
+
+	if ((pWndParent != NULL) && (m_iShowProgressBar))
+	{
+		m_wndLoading.SetExtraData(0, (int)this);
+		m_wndLoading.SetExtraData(1, (int)pLog);
+		m_wndLoading.CreateAsDialog(pWndParent->GetInstance(), IDD_LOADING, 0, pWndParent);
+
+		SetWindowText(m_wndLoading.GetHWND(), "Saving Resources");
+
+		hwndSavingText = GetDlgItem(m_wndLoading.GetHWND(), IDC_LOADING_TEXT1);
+		hwndProgressBar = GetDlgItem(m_wndLoading.GetHWND(), IDC_LOADING_PROGRESS1);
+	}
+
+	std::string szSaving;
+
+	int i, j;
+
+	int iNumResources = 0;
+
+	for (i = 0; i < m_vResources.size(); i++)
+		iNumResources += m_vResources[i].size();
+
+	if ((pWndParent != NULL) && (m_iShowProgressBar))
+	{
+		SendMessage(hwndProgressBar, PBM_SETRANGE, 0, MAKELPARAM(0, (short)iNumResources - 1));
+	}
+
+	int iCurIndex = 0;
+
+	int iCount;
+
+	const std::string* pSzFieldNames;
+
+	std::string szImageOrSoundFilename1, szImageOrSoundFilename2;
+	
+	for (i = 0; i < NUM_RESOURCE_TYPES; i++)
+	{
+		// open a file output for each CSV
+		std::ofstream CSVOutStream;
+
+		if (((i == CNR_TYPE_CICN) && (!m_iCicnSave)) ||
+			((i == CNR_TYPE_PICT) && (!m_iPictSave)) ||
+			((i == CNR_TYPE_RLE8) && (!m_iRle8Save)) ||
+			((i == CNR_TYPE_RLED) && (!m_iRleDSave)) ||
+			((i == CNR_TYPE_SND) && (!m_iSndSave)))
+		{
+			iCurIndex += m_vResources[i].size();
+
+			continue;
+		}
+
+		if (m_vResources[i].size() > 0)
+		{
+
+			// get the child file name
+			char fname[MAX_PATH];
+			strcpy(fname, szDirectory);
+			strcat(fname, "\\");
+			strcat(fname, g_szResourceTypes[i].c_str());
+			strcat(fname, ".csv");
+			CSVOutStream.open(fname);
+
+			if (!CSVOutStream.is_open())
+				return 0;
+
+			CSVOutStream << "Resource Type,ID,Name,";
+
+			iCount = m_vResources[i][0]->GetNumFields();
+
+			pSzFieldNames = m_vResources[i][0]->GetFieldNames();
+
+			for (j = 0; j < iCount; j++)
+				PrintTextField(CSVOutStream, pSzFieldNames[j].c_str(), ',');
+
+			CSVOutStream << "End-of-resource\n";
+		}
+
+		for (j = 0; j < m_vResources[i].size(); j++, iCurIndex++)
+		{
+			if ((pWndParent != NULL) && (m_iShowProgressBar))
+			{
+				SendMessage(hwndProgressBar, PBM_DELTAPOS, 1, 0);
+
+				szSaving = "Saving resource ";
+
+				szSaving += ToString(iCurIndex + 1);
+				szSaving += " of ";
+				szSaving += ToString(iNumResources);
+
+				Static_SetText(hwndSavingText, szSaving.c_str());
+			}
+
+			PrintTextField(CSVOutStream, g_szResourceTypes[i].c_str(), ',');
+
+			CSVOutStream << m_vResources[i][j]->GetID() << ',';
+
+			PrintTextField(CSVOutStream, m_vResources[i][j]->GetName(), ',');
+
+			m_iFileOffset = CSVOutStream.tellp();
+
+			if (i == CNR_TYPE_CICN)
+			{
+				szImageOrSoundFilename1 = GenerateFilename(m_szCicnSubdirectory, m_szCicnFilenamePrefix, ".bmp", m_vResources[i][j]->GetID());
+				szImageOrSoundFilename2 = GenerateFilename(m_szCicnMaskSubdirectory, m_szCicnMaskFilenamePrefix, ".bmp", m_vResources[i][j]->GetID());
+
+				m_vResources[i][j]->SaveToTextEx(CSVOutStream, std::string(m_szFilePath), szImageOrSoundFilename1, szImageOrSoundFilename2, 0);
+			}
+			else if (i == CNR_TYPE_PICT)
+			{
+				szImageOrSoundFilename1 = GenerateFilename(m_szPictSubdirectory, m_szPictFilenamePrefix, g_szImageTypeExtensions[m_iPictImageFileType].c_str(), m_vResources[i][j]->GetID());
+
+				m_vResources[i][j]->SaveToTextEx(CSVOutStream, std::string(m_szFilePath), szImageOrSoundFilename1, std::string(""), m_iPictImageFileType);
+			}
+			else if (i == CNR_TYPE_RLE8)
+			{
+				szImageOrSoundFilename1 = GenerateFilename(m_szRle8Subdirectory, m_szRle8FilenamePrefix, g_szRleImageTypeExtensions[m_iRle8ImageFileType].c_str(), m_vResources[i][j]->GetID());
+				szImageOrSoundFilename2 = GenerateFilename(m_szRle8MaskSubdirectory, m_szRle8MaskFilenamePrefix, g_szRleImageTypeExtensions[m_iRle8MaskFileType].c_str(), m_vResources[i][j]->GetID());
+
+				m_vResources[i][j]->SaveToTextEx(CSVOutStream, std::string(m_szFilePath), szImageOrSoundFilename1, szImageOrSoundFilename2, m_iRle8FramesPerRow);
+			}
+			else if (i == CNR_TYPE_RLED)
+			{
+				szImageOrSoundFilename1 = GenerateFilename(m_szRleDSubdirectory, m_szRleDFilenamePrefix, g_szRleImageTypeExtensions[m_iRleDImageFileType].c_str(), m_vResources[i][j]->GetID());
+				szImageOrSoundFilename2 = GenerateFilename(m_szRleDMaskSubdirectory, m_szRleDMaskFilenamePrefix, g_szRleImageTypeExtensions[m_iRleDMaskFileType].c_str(), m_vResources[i][j]->GetID());
+
+				m_vResources[i][j]->SaveToTextEx(CSVOutStream, std::string(m_szFilePath), szImageOrSoundFilename1, szImageOrSoundFilename2, m_iRleDFramesPerRow);
+			}
+			else if (i == CNR_TYPE_SND)
+			{
+				szImageOrSoundFilename1 = GenerateFilename(m_szSndSubdirectory, m_szSndFilenamePrefix, ".wav", m_vResources[i][j]->GetID());
+
+				m_vResources[i][j]->SaveToTextEx(CSVOutStream, std::string(m_szFilePath), szImageOrSoundFilename1, std::string(""), 0);
+			}
+			else
+			{
+				m_vResources[i][j]->SaveToText(CSVOutStream, ',');
+			}
+
+			CSVOutStream << "\"EOR\"\n";
+		}
+
+		if (m_vResources[i].size() > 0)
+		{
+			CSVOutStream << '\n';
+		}
+		CSVOutStream.close();
+	}
+
+	m_wndLoading.Destroy();
 
 	return 1;
 }

@@ -98,16 +98,16 @@ int CBoomResource::SwapEndians(void)
 	return 1;
 }
 
-int CBoomResource::SaveToText(std::ostream & output)
+int CBoomResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iFrameAdvance  << '\t'
-		   << m_iSoundIndex    << '\t'
-		   << m_iGraphicsIndex << '\t';
+	output << m_iFrameAdvance  << delim
+		   << m_iSoundIndex    << delim
+		   << m_iGraphicsIndex << delim;
 
 	return 1;
 }
 
-int CBoomResource::LoadFromText(std::istream & input)
+int CBoomResource::LoadFromText(std::istream & input, char delim)
 {
 	input >> m_iFrameAdvance
 		  >> m_iSoundIndex

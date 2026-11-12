@@ -142,25 +142,25 @@ int CRankResource::SwapEndians(void)
 	return 1;
 }
 
-int CRankResource::SaveToText(std::ostream & output)
+int CRankResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iWeight     << '\t'
-		   << m_iGovernment << '\t'
-		   << m_iSalary     << '\t'
-		   << m_iSalaryCap  << '\t'
-		   << m_iPriceMod   << '\t';
+	output << m_iWeight     << delim
+		   << m_iGovernment << delim
+		   << m_iSalary     << delim
+		   << m_iSalaryCap  << delim
+		   << m_iPriceMod   << delim;
 
-	PrintTextField(output, m_szConvName,  '\t');
-	PrintTextField(output, m_szShortName, '\t');
+	PrintTextField(output, m_szConvName,  delim);
+	PrintTextField(output, m_szShortName, delim);
 
-	PrintHex64Field(output, m_cContribute, '\t');
+	PrintHex64Field(output, m_cContribute, delim);
 
-	PrintHex16Field(output, (char *)&m_iFlags, '\t');
+	PrintHex16Field(output, (char *)&m_iFlags, delim);
 
 	return 1;
 }
 
-int CRankResource::LoadFromText(std::istream & input)
+int CRankResource::LoadFromText(std::istream & input, char delim)
 {
 	input >> m_iWeight
 		  >> m_iGovernment

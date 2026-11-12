@@ -223,7 +223,7 @@ int CSndResource::SaveToTextEx(std::ostream & output, std::string & szFilePath, 
 	PrintTextField(output, szFilename1.c_str(), '\t');
 
 	std::string szFilename = szFilePath + szFilename1;
-
+	MessageBox(NULL, szFilename.c_str(), "Debug", MB_OK | MB_ICONEXCLAMATION);
 	FileExport(szFilename.c_str(), 0);
 
 	return 1;
@@ -994,6 +994,7 @@ int CSndResource::FileExport(const char *szFilename, int iShowErrorMessages)
 
 		qtErr = qt::SoundConverterConvertBuffer(soundConverter, &m_vData[84], m_pSndInfo->numFrames, &vOutputData[0], (ULONG *)&iOutputFrames, (ULONG *)&iOutputBytes);
 
+		// Throws an error - why?
 		qtErr = qt::SoundConverterEndConversion(soundConverter, &vOutputData[iOutputBytes], (ULONG *)&iOutputFrames, (ULONG *)&iOutputBytes);
 
 		if(qtErr != qt::noErr)

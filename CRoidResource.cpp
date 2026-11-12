@@ -135,26 +135,26 @@ int CRoidResource::SwapEndians(void)
 	return 1;
 }
 
-int CRoidResource::SaveToText(std::ostream & output)
+int CRoidResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iStrength      << '\t'
-		   << m_iSpinRate      << '\t'
-		   << m_iYieldType     << '\t'
-		   << m_iYieldAmount   << '\t'
-		   << m_iParticleCount << '\t';
+	output << m_iStrength      << delim
+		   << m_iSpinRate      << delim
+		   << m_iYieldType     << delim
+		   << m_iYieldAmount   << delim
+		   << m_iParticleCount << delim;
 
-	PrintHex32Field(output, (char *)&m_iParticleColor, '\t');
+	PrintHex32Field(output, (char *)&m_iParticleColor, delim);
 
-	output << m_iFragmentType1 << '\t'
-		   << m_iFragmentType2 << '\t'
-		   << m_iFragmentCount << '\t'
-		   << m_iExplosionType << '\t'
-		   << m_iMass          << '\t';
+	output << m_iFragmentType1 << delim
+		   << m_iFragmentType2 << delim
+		   << m_iFragmentCount << delim
+		   << m_iExplosionType << delim
+		   << m_iMass          << delim;
 
 	return 1;
 }
 
-int CRoidResource::LoadFromText(std::istream & input)
+int CRoidResource::LoadFromText(std::istream & input, char delim)
 {
 	input >> m_iStrength
 		  >> m_iSpinRate

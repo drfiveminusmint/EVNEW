@@ -110,19 +110,19 @@ int CSpinResource::SwapEndians(void)
 	return 1;
 }
 
-int CSpinResource::SaveToText(std::ostream & output)
+int CSpinResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iSpritesID << '\t'
-		   << m_iMaskID    << '\t'
-		   << m_iXSize     << '\t'
-		   << m_iYSize     << '\t'
-		   << m_iXTiles    << '\t'
-		   << m_iYTiles    << '\t';
+	output << m_iSpritesID << delim
+		   << m_iMaskID    << delim
+		   << m_iXSize     << delim
+		   << m_iYSize     << delim
+		   << m_iXTiles    << delim
+		   << m_iYTiles    << delim;
 
 	return 1;
 }
 
-int CSpinResource::LoadFromText(std::istream & input)
+int CSpinResource::LoadFromText(std::istream & input, char delim)
 {
 	input >> m_iSpritesID
 		  >> m_iMaskID

@@ -112,20 +112,20 @@ int COopsResource::SwapEndians(void)
 	return 1;
 }
 
-int COopsResource::SaveToText(std::ostream & output)
+int COopsResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iStellar    << '\t'
-		   << m_iCommodity  << '\t'
-		   << m_iPriceDelta << '\t'
-		   << m_iDuration   << '\t'
-		   << m_iRandom     << '\t';
+	output << m_iStellar    << delim
+		   << m_iCommodity  << delim
+		   << m_iPriceDelta << delim
+		   << m_iDuration   << delim
+		   << m_iRandom     << delim;
 
-	PrintTextField(output, m_szActiveOn, '\t');
+	PrintTextField(output, m_szActiveOn, delim);
 
 	return 1;
 }
 
-int COopsResource::LoadFromText(std::istream & input)
+int COopsResource::LoadFromText(std::istream & input, char delim)
 {
 	input >> m_iStellar
 		  >> m_iCommodity

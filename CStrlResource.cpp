@@ -131,9 +131,9 @@ int CStrlResource::Load(char *pInput, int iSize)
 	return 1;
 }
 
-int CStrlResource::SaveToText(std::ostream & output)
+int CStrlResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_vStrings.size() << '\t';
+	output << m_vStrings.size() << delim;
 
 	int i;
 
@@ -141,25 +141,25 @@ int CStrlResource::SaveToText(std::ostream & output)
 	{
 		if(i % 252 < 251)
 		{
-			PrintTextField(output, m_vStrings[i].c_str(), '\t');
+			PrintTextField(output, m_vStrings[i].c_str(), delim);
 		}
 		else
 		{
 			PrintTextField(output, m_vStrings[i].c_str(), '\n');
 
-			output << "\t\t\t\t";
+			output << delim << delim << delim << delim;
 		}
 	}
 
 	if(i% 252 == 251)
-		output << "\n\t\t\t\t";
+		output << "\n" << delim << delim << delim << delim;
 	else
-		output << '\t';
+		output << delim;
 
 	return 1;
 }
 
-int CStrlResource::LoadFromText(std::istream & input)
+int CStrlResource::LoadFromText(std::istream & input, char delim)
 {
 	int iCount;
 

@@ -58,6 +58,8 @@ public:
 	int Load(char *szFilename, CWindow *pWndParent);
 	int Save(CWindow *pWndParent);
 
+	int ExportToCSV(char* szDirectory, CWindow* pWndParent);
+
 	CNovaResource * AllocateResource(int iType);
 
 	std::vector< std::vector<CNovaResource *> > m_vResources;	// Public to make interface simpler
@@ -71,6 +73,7 @@ private:
 	char m_szFilenameNoPath[MAX_PATH];
 
 	int m_iSaveAsText;
+	int m_iExportCSV;
 
 	int m_iFileOffset;
 

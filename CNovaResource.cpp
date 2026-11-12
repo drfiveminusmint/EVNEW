@@ -105,7 +105,7 @@ int CNovaResource::LoadDirect(std::istream & input, int iSize)
 	return 1;
 }
 
-int CNovaResource::SaveToText(std::ostream & output)
+int CNovaResource::SaveToText(std::ostream & output, char delim)
 {
 	return 1;
 }
@@ -115,7 +115,7 @@ int CNovaResource::SaveToTextEx(std::ostream & output, std::string & szFilePath,
 	return 1;
 }
 
-int CNovaResource::LoadFromText(std::istream & input)
+int CNovaResource::LoadFromText(std::istream & input, char delim)
 {
 	return 1;
 }
