@@ -901,7 +901,26 @@ int CEditor::FileImportCSV(void)
 
 int CEditor::FileExportCSV(void)
 {
-	// TODO let us change the export directory
+	TCHAR szFilename[MAX_PATH];
+	BROWSEINFO bi = { 0 };
+	bi.hwndOwner = m_dialogMain.GetHWND();
+	bi.pidlRoot = NULL;
+	bi.pszDisplayName = szFilename;
+	bi.lpszTitle = "Choose an export destination";
+	bi.ulFlags = 0;
+	bi.lpfn = NULL;
+	bi.lParam = 0;
+
+	// get our Item ID list
+	PIDLIST_ABSOLUTE id = SHBrowseForFolder(&bi);
+	if (id != NULL)
+		SHGetPathFromIDList(id, szFilename);	// Combine with our display name to get a path
+	else
+		return 0;
+
+	// load our path into the magical variable
+	m_ofnLoadSave.lpstrFile = szFilename;
+	
 	if (m_plugIn.m_vResources[CNR_TYPE_CICN].size() > 0)
 	{
 		AskForCicnExportFormat();
@@ -964,23 +983,6 @@ int CEditor::FileExportCSV(void)
 
 	// TODO NOT THIS
 	// Get our export folder
-	
-	TCHAR szFilename[MAX_PATH];
-	BROWSEINFO bi = { 0 };
-	bi.hwndOwner = m_dialogMain.GetHWND();
-	bi.pidlRoot = NULL;
-	bi.pszDisplayName = szFilename;
-	bi.lpszTitle = "Choose an export destination";
-	bi.ulFlags = 0;
-	bi.lpfn = NULL;
-	bi.lParam = 0;
-	
-	// get our Item ID list
-	PIDLIST_ABSOLUTE id = SHBrowseForFolder(&bi);
-	if (id != NULL)
-		SHGetPathFromIDList(id, szFilename);	// Combine with our display name to get a path
-	else
-		return 0;
 
 	if (m_plugIn.ExportToCSV(szFilename, &m_dialogMain) == 0)
 	{

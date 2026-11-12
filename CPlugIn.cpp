@@ -1313,6 +1313,11 @@ int CPlugIn::ExportToCSV(char* szDirectory, CWindow* pWndParent)
 	int iSaveFlags = std::ios::out | std::ios::trunc;
 
 	m_iFileOffset = 0;
+	char oldpath[MAX_PATH];
+	// this is horrible, replace it
+	strcpy(oldpath, m_szFilePath);
+	strcpy(m_szFilePath, szDirectory);
+	strcat(m_szFilePath, "\\");
 
 	std::string szBuffer;
 
@@ -1469,6 +1474,9 @@ int CPlugIn::ExportToCSV(char* szDirectory, CWindow* pWndParent)
 	}
 
 	m_wndLoading.Destroy();
+
+	// horrible
+	strcpy(m_szFilePath, oldpath);
 
 	return 1;
 }
