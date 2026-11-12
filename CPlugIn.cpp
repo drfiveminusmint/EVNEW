@@ -1024,7 +1024,6 @@ int CPlugIn::Save(CWindow *pWndParent)
 				{
 					
 					szImageOrSoundFilename1 = GenerateFilename(m_szSndSubdirectory, m_szSndFilenamePrefix, ".wav", m_vResources[i][j]->GetID());
-					MessageBox(NULL, szImageOrSoundFilename1.c_str(), "Debug", MB_OK | MB_ICONEXCLAMATION);
 					m_vResources[i][j]->SaveToTextEx(fileout, std::string(m_szFilePath), szImageOrSoundFilename1, std::string(""), 0);
 				}
 				else
