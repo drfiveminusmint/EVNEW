@@ -35,11 +35,11 @@ const int NUM_JUNK_CONTROLS = 26;
 const int NUM_JUNK_FIELDS = 23;
 
 const std::string g_szJunkFields[NUM_JUNK_FIELDS] =
-	{"Sold At 1", "Sold At 2", "Sold At 3", "Sold At 4", "Sold At 5",
-	 "Sold At 6", "Sold At 7", "Sold At 8", "Bought At 1", "Bought At 2",
-	 "Bought At 3", "Bought At 4", "Bought At 5", "Bought At 6",
-	 "Bought At 7", "Bought At 8", "Base Price", "Scan Mask",
-	 "Lowercase Name", "Abbreviation", "Buy On", "Sell On", "Flags"};
+	{"Low Stel 1", "Low Stel 2", "Low Stel 3", "Low Stel 4", "Low Stel 5",
+	 "Low Stel 6", "Low Stel 7", "Low Stel 8", "High Stel 1", "High Stel 2",
+	 "High Stel 3", "High Stel 4", "High Stel 5", "High Stel 6",
+	 "High Stel 7", "High Stel 8", "Base Price", "Flags", "Scan Mask",
+	 "Lowercase Name", "Status Bar Abbreviation", "BuyOn", "SellOn"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

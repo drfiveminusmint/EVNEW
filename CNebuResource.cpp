@@ -120,7 +120,7 @@ int CNebuResource::SaveToText(std::ostream & output, char delim)
 		   << m_iYSize     << delim;
 
 	PrintTextField(output, m_szActiveOn,  delim);
-	PrintTextField(output, m_szOnExplore, delim);
+	PrintTextField(output, m_szOnExplore, 0);
 
 	return 1;
 }

@@ -102,7 +102,7 @@ int CBoomResource::SaveToText(std::ostream & output, char delim)
 {
 	output << m_iFrameAdvance  << delim
 		   << m_iSoundIndex    << delim
-		   << m_iGraphicsIndex << delim;
+		   << m_iGraphicsIndex;
 
 	return 1;
 }
@@ -111,7 +111,7 @@ int CBoomResource::LoadFromText(std::istream & input, char delim)
 {
 	m_iFrameAdvance = ReadIntField(input, delim);
 	m_iSoundIndex = ReadIntField(input, delim);
-	m_iGraphicsIndex = ReadIntField(input, delim);
+	m_iGraphicsIndex = ReadIntField(input, '\n');
 
 	return 1;
 }

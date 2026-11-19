@@ -225,15 +225,30 @@ int COutfResource::SaveToText(std::ostream & output, char delim)
 		   << m_iTechLevel     << delim
 		   << m_iModTypes[0]   << delim
 		   << m_iModValues[0]  << delim
+		   << m_iMaxCount      << delim;
+
+	PrintHex16Field(output, (char*)&m_iFlags, delim);
+
+		   
+	output << m_iCost          << delim
 		   << m_iModTypes[1]   << delim
 		   << m_iModValues[1]  << delim
 		   << m_iModTypes[2]   << delim
 		   << m_iModValues[2]  << delim
 		   << m_iModTypes[3]   << delim
-		   << m_iModValues[3]  << delim
-		   << m_iMaxCount      << delim
-		   << m_iCost          << delim
-		   << m_iItemClass     << delim;
+		   << m_iModValues[3]  << delim;
+
+	PrintHex64Field(output, m_cContribute, delim);
+	PrintHex64Field(output, m_cRequire, delim);
+
+	PrintTextField(output, m_szAvailability, delim);
+	PrintTextField(output, m_szOnPurchase, delim);
+	PrintTextField(output, m_szOnSell, delim);
+	PrintTextField(output, m_szShortName, delim);
+	PrintTextField(output, m_szLowerCaseName, delim);
+	PrintTextField(output, m_szLowerCasePluralName, delim);
+
+	output << m_iItemClass << delim;
 
 	char c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
 
@@ -243,20 +258,7 @@ int COutfResource::SaveToText(std::ostream & output, char delim)
 
 	output << m_iBuyRandom << delim;
 
-	PrintTextField(output, m_szAvailability, delim);
-	PrintTextField(output, m_szOnPurchase,   delim);
-	PrintTextField(output, m_szOnSell,       delim);
-
-	PrintHex64Field(output, m_cContribute, delim);
-	PrintHex64Field(output, m_cRequire,    delim);
-
-	PrintTextField(output, m_szShortName,           delim);
-	PrintTextField(output, m_szLowerCaseName,       delim);
-	PrintTextField(output, m_szLowerCasePluralName, delim);
-
-	output << m_iRequiredGovernment << delim;
-
-	PrintHex16Field(output, (char *)&m_iFlags, delim);
+	output << m_iRequiredGovernment;
 
 	return 1;
 }
@@ -266,13 +268,29 @@ int COutfResource::LoadFromText(std::istream & input, char delim)
 	m_iDisplayWeight = ReadIntField(input, delim);
 	m_iMass = ReadIntField(input, delim);
 	m_iTechLevel = ReadIntField(input, delim);
-	for (int i = 0; i < 4; i++) 
+	m_iModTypes[0] = ReadIntField(input, delim);
+	m_iModValues[0] = ReadIntField(input, delim);
+	m_iMaxCount = ReadIntField(input, delim);
+
+	ReadHex16Field(input, (char*)&m_iFlags);
+
+	m_iCost = ReadIntField(input, delim);
+	for (int i = 1; i < 4; i++) 
 	{
 		m_iModTypes[i] = ReadIntField(input, delim);
 		m_iModValues[i] = ReadIntField(input, delim);
 	}
-	m_iMaxCount = ReadIntField(input, delim);
-	m_iCost = ReadIntField(input, delim);
+
+	ReadHex64Field(input, m_cContribute);
+	ReadHex64Field(input, m_cRequire);
+
+	ReadTextField(input, m_szAvailability, 255);
+	ReadTextField(input, m_szOnPurchase, 255);
+	ReadTextField(input, m_szOnSell, 255);
+	ReadTextField(input, m_szShortName, 64);
+	ReadTextField(input, m_szLowerCaseName, 64);
+	ReadTextField(input, m_szLowerCasePluralName, 65);
+
 	m_iItemClass = ReadIntField(input, delim);
 
 	ReadHex16Field(input, m_cScanMask);
@@ -280,21 +298,7 @@ int COutfResource::LoadFromText(std::istream & input, char delim)
 	char c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
 
 	m_iBuyRandom = ReadIntField(input, delim);
-
-	ReadTextField(input, m_szAvailability, 255);
-	ReadTextField(input, m_szOnPurchase,   255);
-	ReadTextField(input, m_szOnSell,       255);
-
-	ReadHex64Field(input, m_cContribute);
-	ReadHex64Field(input, m_cRequire);
-
-	ReadTextField(input, m_szShortName,           64);
-	ReadTextField(input, m_szLowerCaseName,       64);
-	ReadTextField(input, m_szLowerCasePluralName, 65);
-
-	m_iRequiredGovernment = ReadIntField(input, delim);
-
-	ReadHex16Field(input, (char *)&m_iFlags);
+	m_iRequiredGovernment = ReadIntField(input, '\n');
 
 	return 1;
 }

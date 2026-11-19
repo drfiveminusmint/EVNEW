@@ -48,20 +48,18 @@ const std::string g_szWeapExitTypeChoices[NUM_WEAP_EXITTYPE_CHOICES] =
 const int NUM_WEAP_FIELDS = 54;
 
 const std::string g_szWeapFields[NUM_WEAP_FIELDS] =
-	{"Reload", "Lifetime", "Mass Damage", "Energy Damage", "Guidance", "Speed",
-	 "Ammo Type", "Graphics", "Inaccuracy", "Sound", "Impact", "Explosion Type",
-	 "Proximity Radius", "Blast Radius", "Smoke Set", "Decay", "Particle Count",
-	 "Particle Velocity", "Min Particle Life", "Max Particle Life",
-	 "Particle Color", "Beam Length", "Beam Width", "Beam Falloff", "Beam Color",
-	 "Corona Color", "Submunitions Count", "Submunitions Type",
-	 "Submunitions Angle", "Submunitions Limit", "Proximity Delay", "Ionization",
-	 "Hit Particle Count", "Hit Particle Life", "Hit Particle Velocity",
-	 "Hit Particle Color", "Exit Type", "Burst Count", "Burst Reload",
-	 "Jamming Type 1 Vulnerability", "Jamming Type 2 Vulnerability",
-	 "Jamming Type 3 Vulnerability", "Jamming Type 4 Vulnerability", "Durability",
-	 "Guided Turn Rate", "Max Ammo", "Recoil", "Lightning Density",
-	 "Lightning Amplitude", "Ionization Color", "Flags 1", "Flags 2", "Flags 3",
-	 "Seeker Flags"};
+	{"Reload", "Duration", "Mass Damage", "Energy Damage", "Guidance", "Speed",
+	 "Ammo Type", "Graphic", "Inaccuracy", "Sound Type", "Impact", "Explode Type",
+	 "Prox Radius", "Blast Radius", "Flags 1", "Seeker", "Smoke Set", "Decay",
+	 "Particles", "Part Speed", "Part Min Life", "Part Max Life", "Part Color",
+	 "Beam Length", "Beam Width", "Corona Falloff", "Beam Color", "Corona Color",
+	 "Sub Count", "Sub Type", "Sub Theta", "Sub Limit",
+	 "Prox Safety", "Flags 2", "Ionization",
+	 "Hit Particles", "Hit Part Life", "Hit Part Speed", "Hit Part Color",
+	 "Recoil", "Exit Type", "Burst Count", "Burst Reload",
+	 "Jam Vuln 1", "Jam Vuln 2", "Jam Vuln 3", "Jam Vuln 4",
+	 "Flags 3", "Durability", "Guided Turn", "Max Ammo", "Li Density",
+	 "Li Amplitude", "Ionize Color"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

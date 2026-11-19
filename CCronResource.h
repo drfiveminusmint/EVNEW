@@ -36,12 +36,11 @@ const int NUM_CRON_FIELDS = 25;
 
 const std::string g_szCronFields[NUM_CRON_FIELDS] =
 	{"First Day", "First Month", "First Year", "Last Day", "Last Month",
-	 "Last Year", "Random", "Duration", "Pre Holdoff", "Post Holdoff",
-	 "Enable On", "On Start", "On End", "Contribute", "Require",
-	 "Government 1", "Government News 1", "Government 2",
-	 "Government News 2", "Government 3", "Government News 3",
-	 "Government 4", "Government News 4", "Independent News",
-	 "Flags"};
+	 "Last Year", "Random", "Duration", "PreHoldoff", "PostHoldoff",
+	 "Ind. News", "Flags", "EnableOn", "OnStart", "OnEnd",
+	 "Contribute", "Require", "Govt 1", "Govt 2", "Govt 3",
+	 "Govt 4", "Govt News 1", "Govt News 2", 
+	 "Govt News 3", "Govt News 4"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

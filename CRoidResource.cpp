@@ -149,7 +149,7 @@ int CRoidResource::SaveToText(std::ostream & output, char delim)
 		   << m_iFragmentType2 << delim
 		   << m_iFragmentCount << delim
 		   << m_iExplosionType << delim
-		   << m_iMass          << delim;
+		   << m_iMass;
 
 	return 1;
 }
@@ -168,7 +168,7 @@ int CRoidResource::LoadFromText(std::istream & input, char delim)
 	m_iFragmentType2 = ReadIntField(input, delim);
 	m_iFragmentCount = ReadIntField(input, delim);
 	m_iExplosionType = ReadIntField(input, delim);
-	m_iMass = ReadIntField(input, delim);
+	m_iMass = ReadIntField(input, '\n');
 
 	return 1;
 }

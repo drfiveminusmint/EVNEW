@@ -291,7 +291,10 @@ int PrintTextField(std::ostream & output, const char *pData, char cDelim)
 			output << pData[i];
 	}
 
-	output << "\"" << cDelim;
+	output << "\"";
+
+	if (cDelim != 0)
+		output << cDelim;
 
 	return 1;
 }
@@ -431,7 +434,8 @@ int PrintHex16Field(std::ostream & output, const char *pData, char cDelim)
 	for(i = 1; i >= 0; i--)
 		output << s_cHexChars[(pData[i] >> 4) & 0x0F] << s_cHexChars[pData[i] & 0x0F];
 
-	output << cDelim;
+	if (cDelim != 0)
+		output << cDelim;
 
 	return 1;
 }
@@ -491,10 +495,10 @@ int ReadHex16Field(std::istream & input, char *pData)
 	else if((c1 != '#') && (c1 != '$'))
 		return 0;
 
-	input.ignore(1);
+	if (input.eof())
+		return 1;
 
-	if(input.eof())
-		return 0;
+	input.ignore(1);
 
 	return 1;
 }
@@ -510,7 +514,8 @@ int PrintHex32Field(std::ostream & output, const char *pData, char cDelim)
 	for(i = 3; i >= 0; i--)
 		output << s_cHexChars[(pData[i] >> 4) & 0x0F] << s_cHexChars[pData[i] & 0x0F];
 
-	output << cDelim;
+	if (cDelim != 0)
+		output << cDelim;
 
 	return 1;
 }

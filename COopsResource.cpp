@@ -120,7 +120,7 @@ int COopsResource::SaveToText(std::ostream & output, char delim)
 		   << m_iDuration   << delim
 		   << m_iRandom     << delim;
 
-	PrintTextField(output, m_szActiveOn, delim);
+	PrintTextField(output, m_szActiveOn, 0);
 
 	return 1;
 }

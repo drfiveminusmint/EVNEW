@@ -240,12 +240,12 @@ int CCharResource::SaveToText(std::ostream & output, char delim)
 		   << m_iSystem3      << delim
 		   << m_iSystem4      << delim
 		   << m_iGovernment1  << delim
-		   << m_iStatus1      << delim
 		   << m_iGovernment2  << delim
-		   << m_iStatus2      << delim
 		   << m_iGovernment3  << delim
-		   << m_iStatus3      << delim
 		   << m_iGovernment4  << delim
+		   << m_iStatus1      << delim
+		   << m_iStatus2      << delim
+		   << m_iStatus3      << delim
 		   << m_iStatus4      << delim
 		   << m_iCombatRating << delim
 		   << m_iIntroPict1   << delim
@@ -260,14 +260,15 @@ int CCharResource::SaveToText(std::ostream & output, char delim)
 
 	PrintTextField(output, m_szOnStart, delim);
 
+	PrintHex16Field(output, (char*)&m_iFlags, delim);
+
 	output << m_iStartDay     << delim
 		   << m_iStartMonth   << delim
-		   << m_iStartYear    << delim;
+		   << m_iStartYear	  << delim;
 
 	PrintTextField(output, m_szDatePrefix, delim);
-	PrintTextField(output, m_szDateSuffix, delim);
-
-	PrintHex16Field(output, (char *)&m_iFlags, delim);
+	PrintTextField(output, m_szDateSuffix, 0);
+	
 
 	return 1;
 }
@@ -282,12 +283,12 @@ int CCharResource::LoadFromText(std::istream & input, char delim)
 	m_iSystem3 = ReadIntField(input, delim);
 	m_iSystem4 = ReadIntField(input, delim);
 	m_iGovernment1 = ReadIntField(input, delim);
-	m_iStatus1 = ReadIntField(input, delim);
 	m_iGovernment2 = ReadIntField(input, delim);
-	m_iStatus2 = ReadIntField(input, delim);
 	m_iGovernment3 = ReadIntField(input, delim);
-	m_iStatus3 = ReadIntField(input, delim);
 	m_iGovernment4 = ReadIntField(input, delim);
+	m_iStatus1 = ReadIntField(input, delim);
+	m_iStatus2 = ReadIntField(input, delim);
+	m_iStatus3 = ReadIntField(input, delim);
 	m_iStatus4 = ReadIntField(input, delim);
 	m_iCombatRating = ReadIntField(input, delim);
 	m_iIntroPict1 = ReadIntField(input, delim);
@@ -302,14 +303,14 @@ int CCharResource::LoadFromText(std::istream & input, char delim)
 
 	ReadTextField(input, m_szOnStart, 256);
 
+	ReadHex16Field(input, (char*)&m_iFlags);
+
 	m_iStartDay = ReadIntField(input, delim);
 	m_iStartMonth = ReadIntField(input, delim);
 	m_iStartYear = ReadIntField(input, delim);
 
 	ReadTextField(input, m_szDatePrefix, 16);
 	ReadTextField(input, m_szDateSuffix, 16);
-
-	ReadHex16Field(input, (char *)&m_iFlags);
 
 	return 1;
 }

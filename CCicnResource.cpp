@@ -611,7 +611,7 @@ int CCicnResource::SaveToTextEx(std::ostream & output, std::string & szFilePath,
 		   << m_iBPP    << delim;
 
 	PrintTextField(output, szFilename1.c_str(), delim);
-	PrintTextField(output, szFilename2.c_str(), delim);
+	PrintTextField(output, szFilename2.c_str(), 0);
 
 	std::string szIconFilename, szMaskFilename;
 
@@ -642,6 +642,9 @@ int CCicnResource::LoadFromTextEx(std::istream & input, std::string & szFilePath
 
 	ReadTextField(input, szIconFilename + strlen(szIconFilename), 256 - strlen(szIconFilename));
 	ReadTextField(input, szMaskFilename + strlen(szMaskFilename), 256 - strlen(szMaskFilename));
+
+	MessageBox(NULL, szIconFilename, "Reading", MB_OK | MB_ICONEXCLAMATION);
+
 
 	FileImport(1, szIconFilename, 0);
 	FileImport(0, szMaskFilename, 0);

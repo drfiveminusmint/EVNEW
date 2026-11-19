@@ -40,24 +40,24 @@ const std::string g_szShipEscortTypeChoices[NUM_SHIP_ESCORTTYPE_CHOICES] =
 const int NUM_SHIP_FIELDS = 91;
 
 const std::string g_szShipFields[NUM_SHIP_FIELDS] =
-	{"Cargo", "Shields", "Shield Recharge", "Armor", "Armor Recharge", "Acceleration",
-	 "Max Speed", "Turning", "Fuel", "Free Mass", "Max Guns", "Max Turrets", "Tech Level",
-	 "Cost", "Death Delay", "Explosion 1", "Explosion 2", "Display Weight", "Mass",
-	 "Length", "Crew", "Strength", "Government", "Escape Pod Count", "Fuel Regeneration",
-	 "Skill Variation", "Availability", "Appear On", "On Purchase", "Deionize",
-	 "Max Ionization", "Key Carried", "Contribute Bits", "Require Bits", "Buy Random",
-	 "Hire Random", "On Capture", "On Retire", "Subtitle", "Short Name",
-	 "Communication Name", "Long Name", "Movie File", "Escort AI", "Escort Upgrade To",
-	 "Escort Upgrade Cost", "Escort Sell Value", "Escort Type", "Weapon 1", "Weapon 2",
-	 "Weapon 3", "Weapon 4", "Weapon 5", "Weapon 6", "Weapon 7", "Weapon 8",
-	 "Weapon 1 Count", "Weapon 2 Count", "Weapon 3 Count", "Weapon 4 Count",
-	 "Weapon 5 Count", "Weapon 6 Count", "Weapon 7 Count", "Weapon 8 Count",
-	 "Weapon 1 Ammo", "Weapon 2 Ammo", "Weapon 3 Ammo", "Weapon 4 Ammo", "Weapon 5 Ammo",
-	 "Weapon 6 Ammo", "Weapon 7 Ammo", "Weapon 8 Ammo", "Outfit 1", "Outfit 2",
-	 "Outfit 3", "Outfit 4", "Outfit 5", "Outfit 6", "Outfit 7", "Outfit 8",
-	 "Outfit 1 Count", "Outfit 2 Count", "Outfit 3 Count", "Outfit 4 Count",
-	 "Outfit 5 Count", "Outfit 6 Count", "Outfit 7 Count", "Outfit 8 Count", "Flags 1",
-	 "Flags 2", "Flags 3"};
+	{"Cargo Capacity", "Shields", "Acceleration", "Speed", "Turn Rate", "Fuel", "Free Space", "Armor", "Shield Recharge",
+	 "Weapon 1", "Weap 2", "Weapon 3", "Weapon 4",
+	 "Weap 1 Count", "Weap 2 Count", "Weap 3 Count", "Weap 4 Count",
+	 "Weap 1 Ammo", "Weap 2 Ammo", "Weap 3 Ammo", "Weap 4 Ammo",
+	 "Max Guns", "Max Turrets", "Tech Level", "Cost", "Death Delay", "Armor Recharge", "Explode 1", "Explode 2",
+	 "Display Weight", "Mass", "Length", "AI Type", "Crew", "Strength", "Govt", "Flags", "Pod Count",
+	 "Outfit 1", "Outfit 2", "Outfit 3", "Outfit 4",
+	 "Outf 1 Count", "Outf 2 Count", "Outf 3 Count", "Outf 4 Count",
+	 "Fuel Regen", "Skill Variance", "Flags 2", "Contribute", "Availability",
+	 "AppearOn", "OnPurchase", "Deionize", "Max Ionize", "Key Carried",
+	 "Outfit 5", "Outfit 6", "Outfit 7", "Outfit 8",
+	 "Outf 5 Count", "Outf 6 Count", "Outf 7 Count", "Outf 8 Count",
+	 "Require", "Buy Random", "Hire Random", "OnCapture", "OnRetire",
+	 "Shipyard Name", "Comm Name", "Long Name", "Movie File",
+	 "Weapon 5", "Weapon 6", "Weapon 7", "Weapon 8",
+	 "Weap 5 Count", "Weap 6 Count", "Weap 7 Count", "Weap 8 Count",
+	 "Weap 5 Ammo", "Weap 6 Ammo", "Weap 7 Ammo", "Weap 8 Ammo",
+	 "Subtitle", "Flags 3", "Escort Upgrade", "Upgrade Cost", "Sell Value", "Escort Type"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

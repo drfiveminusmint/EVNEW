@@ -220,7 +220,7 @@ int CSndResource::SwapEndians(void)
 
 int CSndResource::SaveToTextEx(std::ostream & output, std::string & szFilePath, std::string & szFilename1, std::string & szFilename2, int iParam, char delim)
 {
-	PrintTextField(output, szFilename1.c_str(), delim);
+	PrintTextField(output, szFilename1.c_str(), 0);
 
 	std::string szFilename = szFilePath + szFilename1;
 	FileExport(szFilename.c_str(), 0);

@@ -34,15 +34,15 @@ const int NUM_INTF_CONTROLS = 46;
 const int NUM_INTF_FIELDS = 44;
 
 const std::string g_szIntfFields[NUM_INTF_FIELDS] =
-	{"Bright Text", "Dim Text", "Radar X1", "Radar Y1", "Radar X2",
-	 "Radar Y2", "Bright Radar", "Dim Radar", "Shield X1", "Shield Y1",
-	 "Shield X2", "Shield Y2", "Shield Color", "Armor X1", "Armor Y1",
-	 "Armor X2", "Armor Y2", "Armor Color", "Fuel X1", "Fuel Y1",
-	 "Fuel X2", "Fuel Y2", "Fuel Full", "Fuel Partial", "Navigation X1",
-	 "Navigation Y1", "Navigation X2", "Navigation Y2", "Weapon X1",
-	 "Weapon Y1", "Weapon X2", "Weapon Y2", "Target X1", "Target Y1",
-	 "Target X2", "Target Y2", "Cargo X1", "Cargo Y1", "Cargo X2",
-	 "Cargo Y2", "Status Font", "Status Font Size", "Subtitle font size",
+	{"Bright Text", "Dim Text", "Radar T", "Radar L", "Radar B",
+	 "Radar R", "Bright Radar", "Dim Radar", "Shield T", "Shield L",
+	 "Shield B", "Shield R", "Shield Color", "Armor T", "Armor L",
+	 "Armor B", "Armor R", "Armor Color", "Fuel T", "Fuel L",
+	 "Fuel B", "Fuel R", "Fuel Full", "Fuel Partial", "Nav T",
+	 "Nav L", "Nav B", "Nav R", "Weapon T",
+	 "Weapon L", "Weapon B", "Weapon R", "Target T", "Target L",
+	 "Target B", "Target R", "Cargo T", "Cargo L", "Cargo B",
+	 "Cargo R", "Status Font", "Font Size", "Subtitle Size",
 	 "Background"};
 
 ////////////////////////////////////////////////////////////////
@@ -85,55 +85,55 @@ private:
 	UINT  m_iBrightText;
 	UINT  m_iDimText;
 
-	short m_iRadarX1;
-	short m_iRadarY1;
-	short m_iRadarX2;
-	short m_iRadarY2;
+	short m_iRadarT;
+	short m_iRadarL;
+	short m_iRadarB;
+	short m_iRadarR;
 
 	UINT  m_iBrightRadar;
 	UINT  m_iDimRadar;
 
-	short m_iShieldX1;
-	short m_iShieldY1;
-	short m_iShieldX2;
-	short m_iShieldY2;
+	short m_iShieldT;
+	short m_iShieldL;
+	short m_iShieldB;
+	short m_iShieldR;
 
 	UINT  m_iShieldColor;
 
-	short m_iArmorX1;
-	short m_iArmorY1;
-	short m_iArmorX2;
-	short m_iArmorY2;
+	short m_iArmorT;
+	short m_iArmorL;
+	short m_iArmorB;
+	short m_iArmorR;
 
 	UINT  m_iArmorColor;
 
-	short m_iFuelX1;
-	short m_iFuelY1;
-	short m_iFuelX2;
-	short m_iFuelY2;
+	short m_iFuelT;
+	short m_iFuelL;
+	short m_iFuelB;
+	short m_iFuelR;
 
 	UINT  m_iFuelFull;
 	UINT  m_iFuelPartial;
 
-	short m_iNavigationX1;
-	short m_iNavigationY1;
-	short m_iNavigationX2;
-	short m_iNavigationY2;
+	short m_iNavigationT;
+	short m_iNavigationL;
+	short m_iNavigationB;
+	short m_iNavigationR;
 
-	short m_iWeaponX1;
-	short m_iWeaponY1;
-	short m_iWeaponX2;
-	short m_iWeaponY2;
+	short m_iWeaponT;
+	short m_iWeaponL;
+	short m_iWeaponB;
+	short m_iWeaponR;
 
-	short m_iTargetX1;
-	short m_iTargetY1;
-	short m_iTargetX2;
-	short m_iTargetY2;
+	short m_iTargetT;
+	short m_iTargetL;
+	short m_iTargetB;
+	short m_iTargetR;
 
-	short m_iCargoX1;
-	short m_iCargoY1;
-	short m_iCargoX2;
-	short m_iCargoY2;
+	short m_iCargoT;
+	short m_iCargoL;
+	short m_iCargoB;
+	short m_iCargoR;
 
 	char  m_szStatusFont[64];
 	short m_iStatusFontSize;

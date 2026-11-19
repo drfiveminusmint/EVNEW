@@ -34,7 +34,7 @@ const int NUM_SPIN_CONTROLS = 8;
 const int NUM_SPIN_FIELDS = 6;
 
 const std::string g_szSpinFields[NUM_SPIN_FIELDS] =
-	{"Sprite", "Mask", "X Size", "Y Size", "X Tiles", "Y Tiles"};
+	{"Sprite", "Mask", "Frame X", "Frame Y", "Grid X", "Grid Y"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

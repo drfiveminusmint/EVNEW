@@ -34,23 +34,23 @@ const int NUM_SYST_CONTROLS = 95;
 const int NUM_SYST_FIELDS = 78;
 
 const std::string g_szSystFields[NUM_SYST_FIELDS] =
-	{"X Position", "Y Position", "Hyperlink 1", "Hyperlink 2", "Hyperlink 3",
+	{"Position X", "Position Y", "Hyperlink 1", "Hyperlink 2", "Hyperlink 3",
 	 "Hyperlink 4", "Hyperlink 5", "Hyperlink 6", "Hyperlink 7", "Hyperlink 8",
 	 "Hyperlink 9", "Hyperlink 10", "Hyperlink 11", "Hyperlink 12", "Hyperlink 13",
-	 "Hyperlink 14", "Hyperlink 15", "Hyperlink 16", "Stellar 1", "Stellar 2",
-	 "Stellar 3", "Stellar 4", "Stellar 5", "Stellar 6", "Stellar 7", "Stellar 8",
-	 "Stellar 9", "Stellar 10", "Stellar 11", "Stellar 12", "Stellar 13", "Stellar 14",
-	 "Stellar 15", "Stellar 16", "Dude 1", "Dude 2", "Dude 3", "Dude 4", "Dude 5",
-	 "Dude 6", "Dude 7", "Dude 8", "Dude Probability 1", "Dude Probability 2",
-	 "Dude Probability 3", "Dude Probability 4", "Dude Probability 5",
-	 "Dude Probability 6", "Dude Probability 7", "Dude Probability 8", "Num Ships",
-	 "Government", "Message Buoy", "Num Asteroids", "Interference", "Person 1",
-	 "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7",
-	 "Person 8", "Person Probability 1", "Person Probability 2",
-	 "Person Probability 3", "Person Probability 4", "Person Probability 5",
-	 "Person Probability 6", "Person Probability 7", "Person Probability 8",
-	 "Visibility", "Background Color", "Murkiness", "Reinforcement Fleet",
-	 "Reinforcement Time", "Reinforcement Interval", "Asteroid Types"};
+	 "Hyperlink 14", "Hyperlink 15", "Hyperlink 16", "Nav Def 1", "Nav Def 2",
+	 "Nav Def 3", "Nav Def 4", "Nav Def 5", "Nav Def 6", "Nav Def 7", "Nav Def 8",
+	 "Nav Def 9", "Nav Def 10", "Nav Def 11", "Nav Def 12", "Nav Def 13", "Nav Def 14",
+	 "Nav Def 15", "Nav Def 16", "Dude 1", "Dude 2", "Dude 3", "Dude 4", "Dude 5",
+	 "Dude 6", "Dude 7", "Dude 8", "Dude 1 %", "Dude 2 %",
+	 "Dude 3 %", "Dude 4 %", "Dude 5 %",
+	 "Dude 6 %", "Dude 7 %", "Dude 8 %", "Avg Ships",
+	 "Govt", "Message Buoy", "Asteroids", "Interference", "Pers 1",
+	 "Pers 2", "Pers 3", "Pers 4", "Pers 5", "Pers 6", "Pers 7",
+	 "Pers 8", "Pers 1 %", "Pers 2 %",
+	 "Pers 3 %", "Pers 4 %", "Pers 5 %",
+	 "Pers 6 %", "Pers 7 %", "Pers 8 %",
+	 "Background", "Murk", "Roid Types", "Visibility", "Reinf Fleet",
+	 "Reinf Delay", "Reinf Interval"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

@@ -185,7 +185,7 @@ int CFletResource::SaveToText(std::ostream & output, char delim)
 
 	output << m_iQuote << delim;
 
-	PrintHex16Field(output, (char *)&m_iFlags, delim);
+	PrintHex16Field(output, (char *)&m_iFlags, 0);
 
 	return 1;
 }

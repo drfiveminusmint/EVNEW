@@ -153,7 +153,7 @@ int CPictResource::SaveToTextEx(std::ostream & output, std::string & szFilePath,
 	output << m_iWidth  << delim
 		   << m_iHeight << delim;
 
-	PrintTextField(output, szFilename1.c_str(), delim);
+	PrintTextField(output, szFilename1.c_str(), 0);
 
 	std::string szFilename = szFilePath + szFilename1;
 

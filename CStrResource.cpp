@@ -105,7 +105,7 @@ int CStrResource::Load(char *pInput, int iSize)
 
 int CStrResource::SaveToText(std::ostream & output, char delim)
 {
-	PrintTextField(output, m_szString, delim);
+	PrintTextField(output, m_szString, 0);
 
 	return 1;
 }

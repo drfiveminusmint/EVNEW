@@ -209,8 +209,11 @@ int CCronResource::SaveToText(std::ostream & output, char delim)
 		   << m_iRandom          << delim
 		   << m_iDuration        << delim
 		   << m_iPreHoldoff      << delim
-		   << m_iPostHoldoff     << delim;
+		   << m_iPostHoldoff     << delim
+		   << m_iIndependentNews << delim;
 
+	PrintHex16Field(output, (char*)&m_iFlags, delim);
+	
 	PrintTextField(output, m_szEnableOn, delim);
 	PrintTextField(output, m_szOnStart,  delim);
 	PrintTextField(output, m_szOnEnd,    delim);
@@ -219,16 +222,13 @@ int CCronResource::SaveToText(std::ostream & output, char delim)
 	PrintHex64Field(output, m_cRequire,    delim);
 
 	output << m_iGovernment1     << delim
-		   << m_iGovernmentNews1 << delim
 		   << m_iGovernment2     << delim
-		   << m_iGovernmentNews2 << delim
 		   << m_iGovernment3     << delim
-		   << m_iGovernmentNews3 << delim
 		   << m_iGovernment4     << delim
-		   << m_iGovernmentNews4 << delim
-		   << m_iIndependentNews << delim;
-
-	PrintHex16Field(output, (char *)&m_iFlags, delim);
+		   << m_iGovernmentNews1 << delim
+		   << m_iGovernmentNews2 << delim
+		   << m_iGovernmentNews3 << delim
+		   << m_iGovernmentNews4;
 
 	return 1;
 }
@@ -245,6 +245,9 @@ int CCronResource::LoadFromText(std::istream & input, char delim)
 	m_iDuration = ReadIntField(input, delim);
 	m_iPreHoldoff = ReadIntField(input, delim);
 	m_iPostHoldoff = ReadIntField(input, delim);
+	m_iIndependentNews = ReadIntField(input, delim);
+
+	ReadHex16Field(input, (char*)&m_iFlags);
 
 	ReadTextField(input, m_szEnableOn, 255);
 	ReadTextField(input, m_szOnStart,  255);
@@ -254,16 +257,13 @@ int CCronResource::LoadFromText(std::istream & input, char delim)
 	ReadHex64Field(input, m_cRequire);
 
 	m_iGovernment1 = ReadIntField(input, delim);
-	m_iGovernmentNews1 = ReadIntField(input, delim);
 	m_iGovernment2 = ReadIntField(input, delim);
-	m_iGovernmentNews2 = ReadIntField(input, delim);
 	m_iGovernment3 = ReadIntField(input, delim);
-	m_iGovernmentNews3 = ReadIntField(input, delim);
 	m_iGovernment4 = ReadIntField(input, delim);
-	m_iGovernmentNews4 = ReadIntField(input, delim);
-	m_iIndependentNews = ReadIntField(input, delim);
-
-	ReadHex16Field(input, (char *)&m_iFlags);
+	m_iGovernmentNews1 = ReadIntField(input, delim);
+	m_iGovernmentNews2 = ReadIntField(input, delim);
+	m_iGovernmentNews3 = ReadIntField(input, delim);
+	m_iGovernmentNews4 = ReadIntField(input, '\n');
 
 	return 1;
 }

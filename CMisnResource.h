@@ -68,17 +68,16 @@ const std::string g_szMisnShipStartChoices[NUM_MISN_SHIPSTART_CHOICES] =
 const int NUM_MISN_FIELDS = 51;
 
 const std::string g_szMisnFields[NUM_MISN_FIELDS] =
-	{"Available Stellar", "Available Location", "Available Record", "Available Rating",
-	 "Available Random", "Travel Stellar", "Return Stellar", "Cargo Type", "Cargo Amount",
-	 "Cargo Pickup Mode", "Cargo Dropoff Mode", "Scan Mask", "Pay Value", "Ship Count",
-	 "Ship System", "Ship Dude", "Ship Goal", "Ship Behavior", "Ship Name", "Ship Start",
-	 "Completion Government", "Completion Reward", "Ship Subtitle", "Briefing Desc",
-	 "Quick Briefing Desc", "Load Cargo Desc", "Dropoff Cargo Desc", "Completion Desc",
-	 "Failing Desc", "Ship Done Desc", "Refusing Desc", "Time Limit", "Aux. Ship Count",
-	 "Aux. Ship Dude", "Aux. Ship Syst", "Available Ship Type", "Available Bits",
-	 "On Accept", "On Refuse", "On Success", "On Failure", "On Abort", "On Ship Done",
-	 "Require Bits", "Date Increment", "Accept Button", "Refuse Button", "Display Weight",
-	 "Can Abort", "Flags 1", "Flags 2"};
+	{"Avail Stellar", "Avail Location", "Avail Record", "Avail Rating",
+	 "Avail Random", "Travel Stellar", "Return Stellar", "Cargo Type", "Cargo Quantity",
+	 "Pickup Mode", "Dropoff Mode", "Scan Mask", "Pay Value", "Ship Count",
+	 "Ship System", "Ship Dude", "Ship Goal", "Ship Behaviour", "Ship Name", "Ship Start",
+	 "Comp Govt", "Comp Reward", "Ship Subtitle", "Brief Text",
+	 "Quick Brief Text", "Load Text", "Drop Text", "Comp Text",
+	 "Fail Text", "Time Limit", "Can Abort", "Ship Done Text", "Aux Count",
+	 "Aux Dude", "Aux System", "Flags 1", "Flags 2", "Refuse Text", "Avail Ship", "AvailableOn",
+	 "OnAccept", "OnRefuse", "OnSuccess", "OnFailure", "OnAbort", "Require", "Date Increment",
+	 "OnShipDone", "Accept Button", "Refuse Button", "Display Weight"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

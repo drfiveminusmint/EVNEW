@@ -142,7 +142,7 @@ int CRLEResource::SaveToTextEx(std::ostream & output, std::string & szFilePath, 
 		   << iParam       << delim;
 
 	PrintTextField(output, szFilename1.c_str(), delim);
-	PrintTextField(output, szFilename2.c_str(), delim);
+	PrintTextField(output, szFilename2.c_str(), 0);
 
 	std::string szImageFilename, szMaskFilename;
 

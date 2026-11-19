@@ -334,7 +334,7 @@ int CColrResource::SaveToText(std::ostream & output, char delim)
 		   << m_iSlide2X         << delim
 		   << m_iSlide2Y         << delim
 		   << m_iSlide3X         << delim
-		   << m_iSlide3Y         << delim;
+		   << m_iSlide3Y;
 
 	return 1;
 }
@@ -394,7 +394,7 @@ int CColrResource::LoadFromText(std::istream & input, char delim)
 	m_iSlide2X = ReadIntField(input, delim);
 	m_iSlide2Y = ReadIntField(input, delim);
 	m_iSlide3X = ReadIntField(input, delim);
-	m_iSlide3Y = ReadIntField(input, delim);
+	m_iSlide3Y = ReadIntField(input, '\n');
 
 	return 1;
 }

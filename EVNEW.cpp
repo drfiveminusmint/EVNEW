@@ -249,6 +249,109 @@ int CEditor::Init(HINSTANCE hInstance)
 
 			return 0;
 		}
+		else if (strcmp(szArg1, "-tocsv") == 0)
+		{
+			iCount = ParseCommandLine(szCommandLine, szArg2); szCommandLine += iCount;
+
+			if (iCount == 0)
+			{
+				MessageBox(NULL, "Usage: EVNEW.exe -tocsv \"source.rez\" \"destination-dir\"", "Error", MB_OK | MB_ICONEXCLAMATION);
+
+				return 0;
+			}
+
+			iCount = ParseCommandLine(szCommandLine, szArg3); szCommandLine += iCount;
+
+			if (iCount == 0)
+			{
+				MessageBox(NULL, "Usage: EVNEW.exe -tocsv \"source.rez\" \"destination-dir\"", "Error", MB_OK | MB_ICONEXCLAMATION);
+
+				return 0;
+			}
+
+			if (m_plugIn.Load(szArg2, NULL) == 0)
+				return 0;
+
+			char* pSlash = strrchr(szArg3, '\\');
+
+			if (pSlash == NULL)
+				strcat(szArg3, "\\");
+
+			m_plugIn.ExportToCSV(szArg3, NULL);
+
+			return 0;
+		}
+		else if (strcmp(szArg1, "-fromcsv") == 0)
+		{
+			iCount = ParseCommandLine(szCommandLine, szArg2); szCommandLine += iCount;
+
+			if (iCount == 0)
+			{
+				MessageBox(NULL, "Usage: EVNEW.exe -fromcsv \"source-dir\" \"destination.rez\"", "Error", MB_OK | MB_ICONEXCLAMATION);
+
+				return 0;
+			}
+
+			iCount = ParseCommandLine(szCommandLine, szArg3); szCommandLine += iCount;
+
+			if (iCount == 0)
+			{
+				MessageBox(NULL, "Usage: EVNEW.exe -fromcsv \"source-dir\" \"destination.rez\"", "Error", MB_OK | MB_ICONEXCLAMATION);
+
+				return 0;
+			}
+
+			m_plugIn.SetFilename(szArg3);
+
+			// Prepare string for use with FindFile functions.  First, copy the
+			// string to a buffer, then append '\*' to the directory name.
+
+			TCHAR szDir[MAX_PATH];
+			if (szArg2[strnlen_s(szArg2, MAX_PATH) - 1] != '\\')
+				strcat_s(szArg2, MAX_PATH, "\\");
+			strcpy_s(szDir, MAX_PATH, szArg2);
+			strcat_s(szDir, MAX_PATH, "*");
+
+			// find our files
+			WIN32_FIND_DATA ffd;
+			HANDLE hFind = INVALID_HANDLE_VALUE;
+			DWORD dwError = 0;
+
+			hFind = FindFirstFile(szDir, &ffd);
+
+			if (INVALID_HANDLE_VALUE == hFind)
+			{
+				MessageBox(NULL, szDir, "Error: No Files found in:", MB_OK | MB_ICONEXCLAMATION);
+				return 0;
+			}
+
+			do
+			{
+				// Ignore directories
+				if (ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+					continue;
+
+				// Filter out non-csv files
+				char* dotPos = strrchr(ffd.cFileName, '.');
+				if (dotPos == NULL)
+					continue;
+				if (strcmp(dotPos, ".csv") != 0)
+					continue;
+
+				char csvPath[MAX_PATH];
+				strcpy_s(csvPath, MAX_PATH, szArg2);
+				strcat_s(csvPath, MAX_PATH, ffd.cFileName);
+				m_plugIn.AdditiveLoadCSV(csvPath, NULL);
+				MessageBox(NULL, csvPath, "Loading", MB_OK | MB_ICONEXCLAMATION);
+
+			} while (FindNextFile(hFind, &ffd) != 0);
+
+			//m_plugIn.SetFilename(szArg3);
+			m_plugIn.Save(NULL);
+			FindClose(hFind);
+			//iShouldLoadAtEnd = 1;
+			return 0;
+		}
 		else
 		{
 			iShouldLoadAtEnd = 1;

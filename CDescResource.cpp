@@ -147,7 +147,7 @@ int CDescResource::SaveToText(std::ostream & output, char delim)
 
 	PrintTextField(output, m_szMovieFile, delim);
 
-	PrintHex16Field(output, (char *)&m_iFlags, delim);
+	PrintHex16Field(output, (char *)&m_iFlags, 0);
 
 	return 1;
 }

@@ -34,7 +34,7 @@ const int NUM_NEBU_CONTROLS = 8;
 const int NUM_NEBU_FIELDS = 6;
 
 const std::string g_szNebuFields[NUM_NEBU_FIELDS] =
-	{"X Position", "Y Position", "X Size", "Y Size", "Active On", "On Explore"};
+	{"Position X", "Position Y", "Size X", "Size Y", "ActiveOn", "OnExplore"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

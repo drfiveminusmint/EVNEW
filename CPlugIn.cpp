@@ -356,7 +356,7 @@ int CPlugIn::Load(char *szFilename, CWindow *pWndParent)
 			{
 				filein >> iNumResources;
 
-				if(iNumResources > 0)
+				if(iNumResources > 0 && ((pWndParent != NULL) && (m_iShowProgressBar)))
 					SendMessage(hwndProgressBar, PBM_SETRANGE, 0, MAKELPARAM(0, (short)iNumResources - 1));
 
 				c = filein.get();
@@ -937,7 +937,7 @@ int CPlugIn::Save(CWindow *pWndParent)
 
 	if(m_iSaveAsText)
 	{
-		fileout << "\"Format\""              "\t\"EVNEW text 1.0.1\""        "\n"
+		fileout << "\"Format\""              "\t\"EVNEW text 2.0\""        "\n"
 				   "\"Created by\""          "\t\"EVNEW 1.0.5\"" "\n"
 				   "\"Number of resources\"" "\t"
 
@@ -967,7 +967,7 @@ int CPlugIn::Save(CWindow *pWndParent)
 				for(j = 0; j < iCount; j++)
 					PrintTextField(fileout, pSzFieldNames[j].c_str(), '\t');
 
-				fileout << "\"End-of-resource\"\n";
+				fileout << "\n";
 			}
 
 			for(j = 0; j < m_vResources[i].size(); j++, iCurIndex++)
@@ -1031,7 +1031,7 @@ int CPlugIn::Save(CWindow *pWndParent)
 					m_vResources[i][j]->SaveToText(fileout, '\t');
 				}
 
-				fileout << "\"EOR\"\n";
+				//fileout << "\t\"EOR\"\n";
 			}
 
 			if(m_vResources[i].size() > 0)
@@ -1347,8 +1347,35 @@ int CPlugIn::AdditiveLoadCSV(char* szFilename, CWindow* pWndParent)
 	m_iFileOffset = 0;
 	char oldpath[MAX_PATH];
 	// this is horrible, replace it in the future
-	strcpy(oldpath, m_szFilePath);
+	strcpy(oldpath, m_szFilename);
 	SetFilename(szFilename);
+
+	// get our filename minus the extension
+	char filenameNoExtension[MAX_PATH] = { 0 };
+	for (i = 0; i < MAX_PATH-1; i++)
+	{
+		if (m_szFilenameNoPath[i] == '.' || m_szFilenameNoPath[i] == 0)
+			break;
+		filenameNoExtension[i] = m_szFilenameNoPath[i];
+	}
+
+	// detect our resource ID
+	int resID = -1;
+	for (i = 0; i < NUM_RESOURCE_TYPES; i++)
+		if ((strcmp(filenameNoExtension, g_szResourceTypes[i].c_str()) == 0)
+			|| (strcmp(filenameNoExtension, g_szMacResourceTypes[i].c_str()) == 0)
+			|| (strcmp(filenameNoExtension, g_szResForgeResourceTypes[i].c_str()) == 0))
+			resID = i;
+
+	if (resID == -1) 
+	{
+		MessageBox(pWndParent->GetHWND(), filenameNoExtension, "Couldn't find resource type", MB_OK | MB_ICONEXCLAMATION);
+		// horrible
+		SetFilename(oldpath);
+		return -1;
+	} 
+
+	MessageBox(pWndParent->GetHWND(), g_szResourceTypes[resID].c_str(), "Detected Resource Type = ", MB_OK | MB_ICONEXCLAMATION);
 
 	HWND hwndLoadingText;
 	HWND hwndProgressBar;
@@ -1381,73 +1408,50 @@ int CPlugIn::AdditiveLoadCSV(char* szFilename, CWindow* pWndParent)
 		while (((filein.peek() == '\n') || (filein.peek() == ',')) && (!filein.eof()))
 			filein.ignore(1);
 
-		ReadTextField(filein, szResourceType, 256);
-
 		if ((filein.eof()) || (filein.fail()) || (filein.bad()) || (!filein.good()))
 			break;
 
-
-		for (i = 0; i < NUM_RESOURCE_TYPES; i++)
+		if ((pWndParent != NULL) && (m_iShowProgressBar))
 		{
-			if ((strcmp(szResourceType, g_szResourceTypes[i].c_str()) == 0) || (strcmp(szResourceType, g_szMacResourceTypes[i].c_str()) == 0))
-			{
-				if ((pWndParent != NULL) && (m_iShowProgressBar))
-				{
-					SendMessage(hwndProgressBar, PBM_DELTAPOS, 1, 0);
+			SendMessage(hwndProgressBar, PBM_DELTAPOS, 1, 0);
 
-					szLoading = "Loading resource ";
+			szLoading = "Loading resource ";
 
-					szLoading += ToString(iCurIndex + 1);
-					szLoading += " of ";
+			szLoading += ToString(iCurIndex + 1);
+			szLoading += " of ";
 
-					if (iNumResources > 0)
-						szLoading += ToString(iNumResources);
-					else
-						szLoading += "?";
+			if (iNumResources > 0)
+				szLoading += ToString(iNumResources);
+			else
+				szLoading += "?";
 
-					Static_SetText(hwndLoadingText, szLoading.c_str());
-				}
-
-				m_vResources[i].push_back(AllocateResource(i));
-
-				filein >> iID;
-
-				filein.ignore(1);
-
-				ReadTextField(filein, szResourceName, 256);
-
-				m_iFileOffset = filein.tellg();
-
-				m_vResources[i][m_vResources[i].size() - 1]->SetID(iID);
-				m_vResources[i][m_vResources[i].size() - 1]->SetName(szResourceName);
-				m_vResources[i][m_vResources[i].size() - 1]->SetIsNew(0);
-
-				if (g_iResourceCanLoadSaveText[i])
-				{
-					if (m_vResources[i][m_vResources[i].size() - 1]->LoadFromText(filein, ',') == 0)
-						iError = 1;
-				}
-				else
-				{
-					if (m_vResources[i][m_vResources[i].size() - 1]->LoadFromTextEx(filein, std::string(m_szFilePath), ',') == 0)
-						iError = 1;
-				}
-
-				ReadTextField(filein, szJunk, 4);
-
-				iCurIndex++;
-
-				break;
-			}
+			Static_SetText(hwndLoadingText, szLoading.c_str());
 		}
 
-		if (i == NUM_RESOURCE_TYPES)
-		{
-			c = filein.get();
+		m_vResources[resID].push_back(AllocateResource(resID));
 
-			while ((c != '\n') && (!filein.eof()))
-				c = filein.get();
+		iID = ReadIntField(filein, ',');
+		
+		ReadTextField(filein, szResourceName, 256);
+
+		m_iFileOffset = filein.tellg();
+
+		m_vResources[resID][m_vResources[resID].size() - 1]->SetID(iID);
+		m_vResources[resID][m_vResources[resID].size() - 1]->SetName(szResourceName);
+		m_vResources[resID][m_vResources[resID].size() - 1]->SetIsNew(0);
+
+		if (g_iResourceCanLoadSaveText[resID])
+		{
+			if (m_vResources[resID][m_vResources[resID].size() - 1]->LoadFromText(filein, ',') == 0)
+				iError = 1;
 		}
+		else
+		{
+			if (m_vResources[resID][m_vResources[resID].size() - 1]->LoadFromTextEx(filein, std::string(m_szFilePath), ',') == 0)
+				iError = 1;
+		}
+
+		iCurIndex++;
 	}
 
 	// horrible
@@ -1549,18 +1553,22 @@ int CPlugIn::ExportToCSV(char* szDirectory, CWindow* pWndParent)
 			CSVOutStream.open(fname);
 
 			if (!CSVOutStream.is_open())
+			{
+				MessageBox(pWndParent->GetHWND(), szBuffer.c_str(), "Couldn't create file for CSV", MB_OK | MB_ICONEXCLAMATION);
 				return 0;
+			}
+				
 
-			CSVOutStream << "Resource Type,ID,Name,";
+			CSVOutStream << "ID,Name,";
 
 			iCount = m_vResources[i][0]->GetNumFields();
 
 			pSzFieldNames = m_vResources[i][0]->GetFieldNames();
 
-			for (j = 0; j < iCount; j++)
+			for (j = 0; j < iCount-1; j++)
 				PrintTextField(CSVOutStream, pSzFieldNames[j].c_str(), ',');
 
-			CSVOutStream << "End-of-resource\n";
+			PrintTextField(CSVOutStream, pSzFieldNames[iCount - 1].c_str(), '\n');
 		}
 
 		for (j = 0; j < m_vResources[i].size(); j++, iCurIndex++)
@@ -1577,8 +1585,6 @@ int CPlugIn::ExportToCSV(char* szDirectory, CWindow* pWndParent)
 
 				Static_SetText(hwndSavingText, szSaving.c_str());
 			}
-
-			PrintTextField(CSVOutStream, g_szResourceTypes[i].c_str(), ',');
 
 			CSVOutStream << m_vResources[i][j]->GetID() << ',';
 
@@ -1624,7 +1630,7 @@ int CPlugIn::ExportToCSV(char* szDirectory, CWindow* pWndParent)
 				m_vResources[i][j]->SaveToText(CSVOutStream, ',');
 			}
 
-			CSVOutStream << "\"EOR\"\n";
+			CSVOutStream << "\n";
 		}
 
 		if (m_vResources[i].size() > 0)

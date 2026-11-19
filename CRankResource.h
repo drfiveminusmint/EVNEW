@@ -35,8 +35,8 @@ const int NUM_RANK_CONTROLS = 21;
 const int NUM_RANK_FIELDS = 9;
 
 const std::string g_szRankFields[NUM_RANK_FIELDS] =
-	{"Weight", "Government", "Salary", "Salary Cap", "Price Mod",
-	 "Conversation Name", "Short Name", "Contribute Bits", "Flags"};
+	{"Weight", "Govt", "Price Mod", "Salary", "Salary Cap",
+	 "Contribute", "Flags", "Conv Name", "Short Name"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

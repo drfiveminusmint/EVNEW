@@ -39,14 +39,15 @@ const std::string g_szSpobCommodityPriceChoices[NUM_SPOB_COMMODITYPRICE_CHOICES]
 const int NUM_SPOB_FIELDS = 42;
 
 const std::string g_szSpobFields[NUM_SPOB_FIELDS] =
-	{"X Position", "Y Position", "Graphics", "Tribute", "Tech Level", "Special Tech 1",
-	 "Special Tech 2", "Special Tech 3", "Special Tech 4", "Special Tech 5",
-	 "Special Tech 6", "Special Tech 7", "Special Tech 8", "Government", "Minimum Status",
-	 "Custom Landscape", "Custom Count", "Defense Dude", "Defense Count", "Animation Delay",
-	 "Frame 0 Bias", "Hyperlink 1", "Hyperlink 2", "Hyperlink 3", "Hyperlink 4",
-	 "Hyperlink 5", "Hyperlink 6", "Hyperlink 7", "Hyperlink 8", "On Dominate",
-	 "On Release", "Landing Fee", "Gravity", "Weapon", "Strength", "Dead Type",
-	 "Dead Time", "Explosion Type", "On Destroy", "On Regenerate", "Flags 1", "Flags 2"};
+	{"Position X", "Position Y", "Graphic Type", "Flags", "Tribute", "Tech Level",
+	 "Tech 1", "Tech 2", "Tech 3",
+	 "Govt", "Min Status", "Custom Pict", "Custom Sound",
+	 "Defense Dude", "Defense Count", "Flags 2", "Anim Delay", "Frame-0 Bias",
+	 "Hyperlink 1", "Hyperlink 2", "Hyperlink 3", "Hyperlink 4",
+	 "Hyperlink 5", "Hyperlink 6", "Hyperlink 7", "Hyperlink 8",
+	 "OnDominate", "OnRelease", "Landing Fee", "Gravity", "Weapon",
+	 "Strength", "Dead Type", "Dead Time", "Explode Type", "OnDestroy", "OnRegen",
+	 "Tech 4", "Tech 5", "Tech 6", "Tech 7", "Tech 8"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

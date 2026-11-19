@@ -151,11 +151,6 @@ int CStrlResource::SaveToText(std::ostream & output, char delim)
 		}
 	}
 
-	if(i% 252 == 251)
-		output << "\n" << delim << delim << delim << delim;
-	else
-		output << delim;
-
 	return 1;
 }
 

@@ -360,12 +360,17 @@ int CMisnResource::SaveToText(std::ostream & output, char delim)
 		   << m_iDropoffCargoDesc     << delim
 		   << m_iCompletionDesc       << delim
 		   << m_iFailDesc             << delim
-		   << m_iShipDoneDesc         << delim
-		   << m_iRefuseDesc           << delim
 		   << m_iTimeLimit            << delim
+		   << m_iCanAbort			  << delim
+		   << m_iShipDoneDesc         << delim
 		   << m_iAuxShipCount         << delim
 		   << m_iAuxShipDude          << delim
-		   << m_iAuxShipSyst          << delim
+		   << m_iAuxShipSyst          << delim;
+
+	PrintHex16Field(output, (char*)&m_iFlags1, delim);
+	PrintHex16Field(output, (char*)&m_iFlags2, delim);
+
+	output << m_iRefuseDesc           << delim
 		   << m_iAvailableShipType    << delim;
 
 	PrintTextField(output, m_szAvailableBits, delim);
@@ -374,20 +379,17 @@ int CMisnResource::SaveToText(std::ostream & output, char delim)
 	PrintTextField(output, m_szOnSuccess,     delim);
 	PrintTextField(output, m_szOnFailure,     delim);
 	PrintTextField(output, m_szOnAbort,       delim);
-	PrintTextField(output, m_szOnShipDone,    delim);
 
 	PrintHex64Field(output, m_cRequire, delim);
 
 	output << m_iDateIncrement << delim;
 
+	PrintTextField(output, m_szOnShipDone,    delim);
+
 	PrintTextField(output, m_szAcceptButton, delim);
 	PrintTextField(output, m_szRefuseButton, delim);
 
-	output << m_iDisplayWeight << delim
-		   << m_iCanAbort      << delim;
-
-	PrintHex16Field(output, (char *)&m_iFlags1, delim);
-	PrintHex16Field(output, (char *)&m_iFlags2, delim);
+	output << m_iDisplayWeight;
 
 	return 1;
 }
@@ -427,12 +429,17 @@ int CMisnResource::LoadFromText(std::istream & input, char delim)
 	m_iDropoffCargoDesc = ReadIntField(input, delim);
 	m_iCompletionDesc = ReadIntField(input, delim);
 	m_iFailDesc = ReadIntField(input, delim);
-	m_iShipDoneDesc = ReadIntField(input, delim);
-	m_iRefuseDesc = ReadIntField(input, delim);
 	m_iTimeLimit = ReadIntField(input, delim);
+	m_iCanAbort = ReadIntField(input, delim);
+	m_iShipDoneDesc = ReadIntField(input, delim);
 	m_iAuxShipCount = ReadIntField(input, delim);
 	m_iAuxShipDude = ReadIntField(input, delim);
 	m_iAuxShipSyst = ReadIntField(input, delim);
+
+	ReadHex16Field(input, (char*)&m_iFlags1);
+	ReadHex16Field(input, (char*)&m_iFlags2);
+
+	m_iRefuseDesc = ReadIntField(input, delim);
 	m_iAvailableShipType = ReadIntField(input, delim);
 
 	ReadTextField(input, m_szAvailableBits, 255);
@@ -441,20 +448,16 @@ int CMisnResource::LoadFromText(std::istream & input, char delim)
 	ReadTextField(input, m_szOnSuccess,     255);
 	ReadTextField(input, m_szOnFailure,     255);
 	ReadTextField(input, m_szOnAbort,       255);
-	ReadTextField(input, m_szOnShipDone,    255);
 
 	ReadHex64Field(input, m_cRequire);
 
 	m_iDateIncrement = ReadIntField(input, delim);
 
+	ReadTextField(input, m_szOnShipDone,    255);
 	ReadTextField(input, m_szAcceptButton, 32);
 	ReadTextField(input, m_szRefuseButton, 33);
 
-	m_iDisplayWeight = ReadIntField(input, delim);
-	m_iCanAbort = ReadIntField(input, delim);
-
-	ReadHex16Field(input, (char *)&m_iFlags1);
-	ReadHex16Field(input, (char *)&m_iFlags2);
+	m_iDisplayWeight = ReadIntField(input, '\n');
 
 	return 1;
 }

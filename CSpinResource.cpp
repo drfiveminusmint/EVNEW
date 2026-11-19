@@ -117,7 +117,7 @@ int CSpinResource::SaveToText(std::ostream & output, char delim)
 		   << m_iXSize     << delim
 		   << m_iYSize     << delim
 		   << m_iXTiles    << delim
-		   << m_iYTiles    << delim;
+		   << m_iYTiles;
 
 	return 1;
 }
@@ -129,7 +129,7 @@ int CSpinResource::LoadFromText(std::istream & input, char delim)
 	m_iXSize = ReadIntField(input, delim);
 	m_iYSize = ReadIntField(input, delim);
 	m_iXTiles = ReadIntField(input, delim);
-	m_iYTiles = ReadIntField(input, delim);
+	m_iYTiles = ReadIntField(input, '\n');
 
 	return 1;
 }

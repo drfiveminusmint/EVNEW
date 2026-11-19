@@ -201,6 +201,8 @@ int CJunkResource::SaveToText(std::ostream & output, char delim)
 		   << m_iBoughtAt[7] << delim
 		   << m_iBasePrice   << delim;
 
+	PrintHex16Field(output, (char*)&m_iFlags, delim);
+
 	char c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
 
 	PrintHex16Field(output, m_cScanMask, delim);
@@ -210,9 +212,7 @@ int CJunkResource::SaveToText(std::ostream & output, char delim)
 	PrintTextField(output, m_szLowerCaseName, delim);
 	PrintTextField(output, m_szAbbreviation,  delim);
 	PrintTextField(output, m_szBuyOn,         delim);
-	PrintTextField(output, m_szSellOn,        delim);
-
-	PrintHex16Field(output, (char *)&m_iFlags, delim);
+	PrintTextField(output, m_szSellOn,        0);
 
 	return 1;
 }
@@ -225,6 +225,7 @@ int CJunkResource::LoadFromText(std::istream & input, char delim)
 		m_iBoughtAt[i] = ReadIntField(input, delim);
 	m_iBasePrice = ReadIntField(input, delim);
 
+	ReadHex16Field(input, (char*)&m_iFlags);
 	ReadHex16Field(input, m_cScanMask);
 
 	char c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
@@ -233,8 +234,6 @@ int CJunkResource::LoadFromText(std::istream & input, char delim)
 	ReadTextField(input, m_szAbbreviation,  64);
 	ReadTextField(input, m_szBuyOn,        255);
 	ReadTextField(input, m_szSellOn,       255);
-
-	ReadHex16Field(input, (char *)&m_iFlags);
 
 	return 1;
 }

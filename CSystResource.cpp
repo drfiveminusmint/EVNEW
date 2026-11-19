@@ -438,17 +438,17 @@ int CSystResource::SaveToText(std::ostream & output, char delim)
 		   << m_iPersonProbabilities[4] << delim
 		   << m_iPersonProbabilities[5] << delim
 		   << m_iPersonProbabilities[6] << delim
-		   << m_iPersonProbabilities[7] << delim;
+		   << m_iPersonProbabilities[7] << delim
+		   << m_iBackgroundColor        << delim
+		   << m_iMurkiness              << delim;
+
+	PrintHex16Field(output, (char*)&m_iAsteroidTypes, delim);
 
 	PrintTextField(output, m_szVisibility, delim);
 
-	output << m_iBackgroundColor        << delim
-		   << m_iMurkiness              << delim
-		   << m_iReinforcementFleet     << delim
+	output << m_iReinforcementFleet     << delim
 		   << m_iReinforcementTime      << delim
-		   << m_iReinforcementInterval  << delim;
-
-	PrintHex16Field(output, (char *)&m_iAsteroidTypes, delim);
+		   << m_iReinforcementInterval;
 
 	return 1;
 }
@@ -474,16 +474,15 @@ int CSystResource::LoadFromText(std::istream & input, char delim)
 		m_iPersons[i] = ReadIntField(input, delim);
 	for (int i = 0; i < 8; i++)
 		m_iPersonProbabilities[i] = ReadIntField(input, delim);
-
-	ReadTextField(input, m_szVisibility, 256);
-
 	m_iBackgroundColor = ReadIntField(input, delim);
 	m_iMurkiness = ReadIntField(input, delim);
+
+	ReadHex16Field(input, (char*)&m_iAsteroidTypes);
+	ReadTextField(input, m_szVisibility, 256);
+	
 	m_iReinforcementFleet = ReadIntField(input, delim);
 	m_iReinforcementTime = ReadIntField(input, delim);
-	m_iReinforcementInterval = ReadIntField(input, delim);
-
-	ReadHex16Field(input, (char *)&m_iAsteroidTypes);
+	m_iReinforcementInterval = ReadIntField(input, '\n');
 
 	return 1;
 }

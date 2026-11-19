@@ -34,7 +34,7 @@ const int NUM_SHAN_CONTROLS = 95;
 const int NUM_SHAN_EXTRAFRAMES_CHOICES = 6;
 
 const std::string g_szShanExtraFramesChoices[NUM_SHAN_EXTRAFRAMES_CHOICES] =
-	{"No extra frames", "Banking", "Banking with engine glow", "Animated ship parts",
+	{"No extra frames", "Banking", "Banking with Glow", "Animated ship parts",
 	 "When carrying Key Carried ships", "Shown in sequence"};
 
 const int NUM_SHAN_BLINKMODE_CHOICES = 4;
@@ -45,27 +45,27 @@ const std::string g_szShanBlinkModeChoices[NUM_SHAN_BLINKMODE_CHOICES] =
 const int NUM_SHAN_FIELDS = 88;
 
 const std::string g_szShanFields[NUM_SHAN_FIELDS] =
-	{"Frames", "Base Image", "Base Mask", "Base Set Count", "Base X Size", "Base Y Size",
-	 "Base Transparency", "Alternate Image", "Alternate Image Mask",
-	 "Alternate Image Set Count", "Alternate Image X Size", "Alternate Image Y Size",
-	 "Engine Glow Image", "Engine Glow Mask", "Engine Glow X Size", "Engine Glow Y Size",
-	 "Running Lights Image", "Running Lights Mask", "Running Lights X Size",
-	 "Running Lights Y Size", "Weapon Image", "Weapon Mask", "Weapon X Size",
-	 "Weapon Y Size", "Shield Image", "Shield Mask", "Shield X Size", "Shield Y Size",
-	 "Animation Delay", "Weapon Decay", "Blink Mode", "Blink Value A", "Blink Value B",
-	 "Blink Value C", "Blink Value D", "Gun Exit 1 X", "Gun Exit 1 Y", "Gun Exit 1 Z",
-	 "Gun Exit 2 X", "Gun Exit 2 Y", "Gun Exit 2 Z", "Gun Exit 3 X", "Gun Exit 3 Y",
-	 "Gun Exit 3 Z", "Gun Exit 4 X", "Gun Exit 4 Y", "Gun Exit 4 Z", "Turret Exit 1 X",
-	 "Turret Exit 1 Y", "Turret Exit 1 Z", "Turret Exit 2 X", "Turret Exit 2 Y",
-	 "Turret Exit 2 Z", "Turret Exit 3 X", "Turret Exit 3 Y", "Turret Exit 3 Z",
-	 "Turret Exit 4 X", "Turret Exit 4 Y", "Turret Exit 4 Z", "Guided Exit 1 X",
-	 "Guided Exit 1 Y", "Guided Exit 1 Z", "Guided Exit 2 X", "Guided Exit 2 Y",
-	 "Guided Exit 2 Z", "Guided Exit 3 X", "Guided Exit 3 Y", "Guided Exit 3 Z",
-	 "Guided Exit 4 X", "Guided Exit 4 Y", "Guided Exit 4 Z", "Beam Exit 1 X",
-	 "Beam Exit 1 Y", "Beam Exit 1 Z", "Beam Exit 2 X", "Beam Exit 2 Y", "Beam Exit 2 Z",
-	 "Beam Exit 3 X", "Beam Exit 3 Y", "Beam Exit 3 Z", "Beam Exit 4 X", "Beam Exit 4 Y",
-	 "Beam Exit 4 Z", "Up Compress X", "Up Compress Y", "Down Compress X", "Down Compress Y",
-	 "Flags"};
+	{"Base Sprite", "Base Mask", "Set Count", "Base X", "Base Y", "Transparency",
+	 "Alt Sprite", "Alt Mask", "Alt Count", "Alt X", "Alt Y",
+	 "Glow Sprite", "Glow Mask", "Glow X", "Glow Y",
+	 "Light Sprite", "Light Mask", "Light X", "Light Y",
+	 "Weap Sprite", "Weap Mask", "Weap X", "Weap Y",
+	 "Flags", "Anim Delay", "Weap Decay", "Frames Per", "Blink Mode",
+	 "Blink Val A", "Blink Val B", "Blink Val C", "Blink Val D",
+	 "Shield Sprite", "Shield Mask", "Shield X", "Shield Y",
+	 "Gun 1 X", "Gun 2 X", "Gun 3 X", "Gun 4 X",
+	 "Gun 1 Y", "Gun 2 Y", "Gun 3 Y", "Gun 4 Y",
+	 "Turret 1 X", "Turret 2 X", "Turret 3 X", "Turret 4 X",
+	 "Turret 1 Y", "Turret 2 Y", "Turret 3 Y", "Turret 4 Y",
+	 "Guided 1 X", "Guided 2 X", "Guided 3 X", "Guided 4 X",
+	 "Guided 1 Y", "Guided 2 Y", "Guided 3 Y", "Guided 4 Y",
+	 "Beam 1 X", "Beam 2 X", "Beam 3 X", "Beam 4 X",
+	 "Beam 1 Y", "Beam 2 Y", "Beam 3 Y", "Beam 4 Y",
+	 "Up Comp X", "Up Comp Y", "Dn Comp X", "Dn Comp Y",
+	 "Gun 1 Z", "Gun 2 Z", "Gun 3 Z", "Gun 4 Z",
+	 "Turret 1 Z", "Turret 2 Z", "Turret 3 Z", "Turret 4 Z",
+	 "Guided 1 Z", "Guided 2 Z", "Guided 3 Z", "Guided 4 Z",
+	 "Beam 1 Z", "Beam 2 Z", "Beam 3 Z", "Beam 4 Z"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

@@ -34,7 +34,7 @@ const int NUM_BOOM_CONTROLS = 5;
 const int NUM_BOOM_FIELDS = 3;
 
 const std::string g_szBoomFields[NUM_BOOM_FIELDS] =
-	{"Frame Advance", "Sound Index", "Graphics Index"};
+	{"Frame Advance", "Sound Index", "Graphic Index"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

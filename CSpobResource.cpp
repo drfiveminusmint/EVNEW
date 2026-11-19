@@ -268,24 +268,25 @@ int CSpobResource::SaveToText(std::ostream & output, char delim)
 {
 	output << m_iXPosition       << delim
 		   << m_iYPosition       << delim
-		   << m_iGraphics        << delim
-		   << m_iTribute         << delim
+		   << m_iGraphics        << delim;
+
+	PrintHex32Field(output, (char*)&m_iFlags1, delim);
+
+	output << m_iTribute         << delim
 		   << m_iTechLevel       << delim
 		   << m_iSpecialTechs[0] << delim
 		   << m_iSpecialTechs[1] << delim
 		   << m_iSpecialTechs[2] << delim
-		   << m_iSpecialTechs[3] << delim
-		   << m_iSpecialTechs[4] << delim
-		   << m_iSpecialTechs[5] << delim
-		   << m_iSpecialTechs[6] << delim
-		   << m_iSpecialTechs[7] << delim
 		   << m_iGovernment      << delim
 		   << m_iMinStatus       << delim
 		   << m_iCustomPicture   << delim
 		   << m_iCustomSound     << delim
 		   << m_iDefenseDude     << delim
-		   << m_iDefenseCount    << delim
-		   << m_iAnimationDelay  << delim
+		   << m_iDefenseCount    << delim;
+
+	PrintHex16Field(output, (char*)&m_iFlags2, delim);
+
+	output << m_iAnimationDelay  << delim
 		   << m_iFrame0Bias      << delim
 		   << m_iHyperlinks[0]   << delim
 		   << m_iHyperlinks[1]   << delim
@@ -307,11 +308,14 @@ int CSpobResource::SaveToText(std::ostream & output, char delim)
 		   << m_iDeadTime      << delim
 		   << m_iExplosionType << delim;
 
-	PrintTextField(output, m_szOnDestroy,    delim);
+	PrintTextField(output, m_szOnDestroy, delim);
 	PrintTextField(output, m_szOnRegenerate, delim);
 
-	PrintHex32Field(output, (char *)&m_iFlags1, delim);
-	PrintHex16Field(output, (char *)&m_iFlags2, delim);
+	output << m_iSpecialTechs[3] << delim
+		   << m_iSpecialTechs[4] << delim
+		   << m_iSpecialTechs[5] << delim
+		   << m_iSpecialTechs[6] << delim
+		   << m_iSpecialTechs[7];
 
 	return 1;
 }
@@ -321,9 +325,12 @@ int CSpobResource::LoadFromText(std::istream & input, char delim)
 	m_iXPosition = ReadIntField(input, delim);
 	m_iYPosition = ReadIntField(input, delim);
 	m_iGraphics = ReadIntField(input, delim);
+
+	ReadHex32Field(input, (char*)&m_iFlags1);
+	
 	m_iTribute = ReadIntField(input, delim);
 	m_iTechLevel = ReadIntField(input, delim);
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 3; i++)
 		m_iSpecialTechs[i] = ReadIntField(input, delim);
 	m_iGovernment = ReadIntField(input, delim);
 	m_iMinStatus = ReadIntField(input, delim);
@@ -331,6 +338,9 @@ int CSpobResource::LoadFromText(std::istream & input, char delim)
 	m_iCustomSound = ReadIntField(input, delim);
 	m_iDefenseDude = ReadIntField(input, delim);
 	m_iDefenseCount = ReadIntField(input, delim);
+
+	ReadHex16Field(input, (char*)&m_iFlags2);
+
 	m_iAnimationDelay = ReadIntField(input, delim);
 	m_iFrame0Bias = ReadIntField(input, delim);
 	for (int i = 0; i < 8; i++)
@@ -350,8 +360,9 @@ int CSpobResource::LoadFromText(std::istream & input, char delim)
 	ReadTextField(input, m_szOnDestroy,    255);
 	ReadTextField(input, m_szOnRegenerate, 255);
 
-	ReadHex32Field(input, (char *)&m_iFlags1);
-	ReadHex16Field(input, (char *)&m_iFlags2);
+	for (int i = 3; i < 7; i++)
+		m_iSpecialTechs[i] = ReadIntField(input, delim);
+	m_iSpecialTechs[7] = ReadIntField(input, '\n');
 
 	return 1;
 }

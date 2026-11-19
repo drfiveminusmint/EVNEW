@@ -73,12 +73,11 @@ const std::string g_szOutfModValueTexts[NUM_OUTF_MODTYPE_CHOICES] =
 const int NUM_OUTF_FIELDS = 26;
 
 const std::string g_szOutfFields[NUM_OUTF_FIELDS] =
-	{"Display Weight", "Mass", "Tech Level", "Mod Type 1", "Mod Value 1",
-	 "Mod Type 2", "Mod Value 2", "Mod Type 3", "Mod Value 3", "Mod Type 4",
-	 "Mod Value 4", "Max Count", "Cost", "Item Class", "Scan Mask", "Buy Random",
-	 "Availability", "On Purchase", "On Sell", "Contribute Bits", "Require Bits",
-	 "Short Name", "Lower Case Name", "Lower Case Plural Name",
-	 "Requirments Government", "Flags"};
+	{"Display Weight", "Mass", "Tech Level", "Mod Type", "Mod Value", "Maximum", "Flags",
+	 "Cost", "Mod Type 2", "Mod Value 2", "Mod Type 3", "Mod Value 3", "Mod Type 4",
+	 "Mod Value 4", "Contribute", "Require", "Availability", "OnPurchase", "OnSell",
+	 "Outfitter Name", "Lowercase Name", "Lowercase Plural", "Item Class", "Scan Mask",
+	 "Avail Random", "Require Govt"};
 
 const int NUM_OUTF_MODTYPE17_CONTROLS = 7;
 const int NUM_OUTF_MODTYPE30_CONTROLS = 4;

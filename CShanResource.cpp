@@ -424,8 +424,7 @@ int CShanResource::SwapEndians(void)
 
 int CShanResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iRotationFrames   << delim
-		   << m_iBaseImage        << delim
+	output << m_iBaseImage        << delim
 		   << m_iBaseMask         << delim
 		   << m_iBaseSetCount     << delim
 		   << m_iBaseXSize        << delim
@@ -447,79 +446,55 @@ int CShanResource::SaveToText(std::ostream & output, char delim)
 		   << m_iWeaponImage      << delim
 		   << m_iWeaponMask       << delim
 		   << m_iWeaponXSize      << delim
-		   << m_iWeaponYSize      << delim
-		   << m_iShieldImage      << delim
-		   << m_iShieldMask       << delim
-		   << m_iShieldXSize      << delim
-		   << m_iShieldYSize      << delim
-		   << m_iAnimationDelay   << delim
+		   << m_iWeaponYSize      << delim;
+
+	PrintHex16Field(output, (char*)&m_iFlags, delim);
+
+	output << m_iAnimationDelay   << delim
 		   << m_iWeaponDecay      << delim
+		   << m_iRotationFrames   << delim
 		   << m_iBlinkMode        << delim
 		   << m_iBlinkValueA      << delim
 		   << m_iBlinkValueB      << delim
 		   << m_iBlinkValueC      << delim
 		   << m_iBlinkValueD      << delim
-		   << m_iGunPosX[0]       << delim
-		   << m_iGunPosY[0]       << delim
-		   << m_iGunPosZ[0]       << delim
-		   << m_iGunPosX[1]       << delim
-		   << m_iGunPosY[1]       << delim
-		   << m_iGunPosZ[1]       << delim
-		   << m_iGunPosX[2]       << delim
-		   << m_iGunPosY[2]       << delim
-		   << m_iGunPosZ[2]       << delim
-		   << m_iGunPosX[3]       << delim
-		   << m_iGunPosY[3]       << delim
-		   << m_iGunPosZ[3]       << delim
-		   << m_iTurretPosX[0]    << delim
-		   << m_iTurretPosY[0]    << delim
-		   << m_iTurretPosZ[0]    << delim
-		   << m_iTurretPosX[1]    << delim
-		   << m_iTurretPosY[1]    << delim
-		   << m_iTurretPosZ[1]    << delim
-		   << m_iTurretPosX[2]    << delim
-		   << m_iTurretPosY[2]    << delim
-		   << m_iTurretPosZ[2]    << delim
-		   << m_iTurretPosX[3]    << delim
-		   << m_iTurretPosY[3]    << delim
-		   << m_iTurretPosZ[3]    << delim
-		   << m_iGuidedPosX[0]    << delim
-		   << m_iGuidedPosY[0]    << delim
-		   << m_iGuidedPosZ[0]    << delim
-		   << m_iGuidedPosX[1]    << delim
-		   << m_iGuidedPosY[1]    << delim
-		   << m_iGuidedPosZ[1]    << delim
-		   << m_iGuidedPosX[2]    << delim
-		   << m_iGuidedPosY[2]    << delim
-		   << m_iGuidedPosZ[2]    << delim
-		   << m_iGuidedPosX[3]    << delim
-		   << m_iGuidedPosY[3]    << delim
-		   << m_iGuidedPosZ[3]    << delim
-		   << m_iBeamPosX[0]      << delim
-		   << m_iBeamPosY[0]      << delim
-		   << m_iBeamPosZ[0]      << delim
-		   << m_iBeamPosX[1]      << delim
-		   << m_iBeamPosY[1]      << delim
-		   << m_iBeamPosZ[1]      << delim
-		   << m_iBeamPosX[2]      << delim
-		   << m_iBeamPosY[2]      << delim
-		   << m_iBeamPosZ[2]      << delim
-		   << m_iBeamPosX[3]      << delim
-		   << m_iBeamPosY[3]      << delim
-		   << m_iBeamPosZ[3]      << delim
-		   << m_iUpCompressX      << delim
+		   << m_iShieldImage      << delim
+		   << m_iShieldMask       << delim
+		   << m_iShieldXSize      << delim
+		   << m_iShieldYSize      << delim;
+	for (int i = 0; i < 4; i++)
+		output << m_iGunPosX[i] << delim;
+	for (int i = 0; i < 4; i++)
+		output << m_iGunPosY[i] << delim;
+	for (int i = 0; i < 4; i++)
+		output << m_iTurretPosX[i] << delim;
+	for (int i = 0; i < 4; i++)
+		output << m_iTurretPosY[i] << delim;
+	for (int i = 0; i < 4; i++)
+		output << m_iGuidedPosX[i] << delim;
+	for (int i = 0; i < 4; i++)
+		output << m_iGuidedPosY[i] << delim;
+	for (int i = 0; i < 4; i++)
+		output << m_iBeamPosX[i] << delim;
+	for (int i = 0; i < 4; i++)
+		output << m_iBeamPosY[i] << delim;
+
+	output << m_iUpCompressX      << delim
 		   << m_iUpCompressY      << delim
 		   << m_iDownCompressX    << delim
-		   << m_iDownCompressY    << delim;
+		   << m_iDownCompressY;
 
-	PrintHex16Field(output, (char *)&m_iFlags, delim);
+	for (int i = 0; i < 4; i++)
+		output	<< delim << m_iGunPosX[i]
+				<< delim << m_iTurretPosZ[i]
+				<< delim << m_iGuidedPosZ[i]
+				<< delim << m_iBeamPosZ[i];
 
 	return 1;
 }
 
 int CShanResource::LoadFromText(std::istream & input, char delim)
 {
-	m_iRotationFrames = ReadIntField(input, delim);
 	m_iBaseImage = ReadIntField(input, delim);
 	m_iBaseMask = ReadIntField(input, delim);
 	m_iBaseSetCount = ReadIntField(input, delim);
@@ -543,47 +518,56 @@ int CShanResource::LoadFromText(std::istream & input, char delim)
 	m_iWeaponMask = ReadIntField(input, delim);
 	m_iWeaponXSize = ReadIntField(input, delim);
 	m_iWeaponYSize = ReadIntField(input, delim);
-	m_iShieldImage = ReadIntField(input, delim);
-	m_iShieldMask = ReadIntField(input, delim);
-	m_iShieldXSize = ReadIntField(input, delim);
-	m_iShieldYSize = ReadIntField(input, delim);
+
+	ReadHex16Field(input, (char*)&m_iFlags);
+
 	m_iAnimationDelay = ReadIntField(input, delim);
 	m_iWeaponDecay = ReadIntField(input, delim);
+	m_iRotationFrames = ReadIntField(input, delim);
 	m_iBlinkMode = ReadIntField(input, delim);
 	m_iBlinkValueA = ReadIntField(input, delim);
 	m_iBlinkValueB = ReadIntField(input, delim);
 	m_iBlinkValueC = ReadIntField(input, delim);
 	m_iBlinkValueD = ReadIntField(input, delim);
+	m_iShieldImage = ReadIntField(input, delim);
+	m_iShieldMask = ReadIntField(input, delim);
+	m_iShieldXSize = ReadIntField(input, delim);
+	m_iShieldYSize = ReadIntField(input, delim);
+
 	for (int i = 0; i < 4; i++)
-	{
 		m_iGunPosX[i] = ReadIntField(input, delim);
+	for (int i = 0; i < 4; i++)
 		m_iGunPosY[i] = ReadIntField(input, delim);
-		m_iGunPosZ[i] = ReadIntField(input, delim);
-	}
 	for (int i = 0; i < 4; i++)
-	{
 		m_iTurretPosX[i] = ReadIntField(input, delim);
+	for (int i = 0; i < 4; i++)
 		m_iTurretPosY[i] = ReadIntField(input, delim);
-		m_iTurretPosZ[i] = ReadIntField(input, delim);
-	}
 	for (int i = 0; i < 4; i++)
-	{
 		m_iGuidedPosX[i] = ReadIntField(input, delim);
-		m_iGuidedPosY[i] = ReadIntField(input, delim);
-		m_iGuidedPosZ[i] = ReadIntField(input, delim);
-	}
 	for (int i = 0; i < 4; i++)
-	{
+		m_iGuidedPosY[i] = ReadIntField(input, delim);
+	for (int i = 0; i < 4; i++)
 		m_iBeamPosX[i] = ReadIntField(input, delim);
+	for (int i = 0; i < 4; i++)
 		m_iBeamPosY[i] = ReadIntField(input, delim);
-		m_iBeamPosZ[i] = ReadIntField(input, delim);
-	}
+
 	m_iUpCompressX = ReadIntField(input, delim);
 	m_iUpCompressY = ReadIntField(input, delim);
 	m_iDownCompressX = ReadIntField(input, delim);
 	m_iDownCompressY = ReadIntField(input, delim);
 
-	ReadHex16Field(input, (char *)&m_iFlags);
+	for (int i = 0; i < 3; i++)
+	{
+		m_iGunPosZ[i] = ReadIntField(input, delim);
+		m_iTurretPosZ[i] = ReadIntField(input, delim);
+		m_iGuidedPosZ[i] = ReadIntField(input, delim);
+		m_iBeamPosZ[i] = ReadIntField(input, delim);
+	}
+	m_iGunPosZ[3] = ReadIntField(input, delim);
+	m_iTurretPosZ[3] = ReadIntField(input, delim);
+	m_iGuidedPosZ[3] = ReadIntField(input, delim);
+	m_iBeamPosZ[3] = ReadIntField(input, '\n');
+
 
 	return 1;
 }

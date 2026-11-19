@@ -34,15 +34,15 @@ const int NUM_COLR_CONTROLS = 47;
 const int NUM_COLR_FIELDS = 45;
 
 const std::string g_szColrFields[NUM_COLR_FIELDS] =
-	{"Button Up", "Button Down", "Button Grey", "Menu Font",
-	 "Menu Font Size", "Menu Color 1", "Menu Color 2",
-	 "Grid Bright", "Grid Dim", "Progress Bar X1",
-	 "Progress Bar Y1", "Progress Bar X2", "Progress Bar Y2",
+	{"Button Up", "Button Down", "Button Disabled", "Menu Font",
+	 "Menu Font Size", "Menu Bright", "Menu Dim",
+	 "Grid Bright", "Grid Dim", "Progress T",
+	 "Progress L", "Progress B", "Progress R",
 	 "Progress Bright", "Progress Dim", "Progress Outline",
 	 "Button 1 X", "Button 1 Y", "Button 2 X", "Button 2 Y",
 	 "Button 3 X", "Button 3 Y", "Button 4 X", "Button 4 Y",
 	 "Button 5 X", "Button 5 Y", "Button 6 X", "Button 6 Y",
-	 "Floating Map", "List Text", "List Background",
+	 "Floating Border", "List Text", "List Background",
 	 "List Highlight", "Escort Highlight", "Button Font",
 	 "Button Font Size", "Logo X", "Logo Y", "Rollover X",
 	 "Rollover Y", "Slide 1 X", "Slide 1 Y", "Slide 2 X",

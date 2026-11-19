@@ -34,9 +34,9 @@ const int NUM_ROID_CONTROLS = 13;
 const int NUM_ROID_FIELDS = 11;
 
 const std::string g_szRoidFields[NUM_ROID_FIELDS] =
-	{"Strength", "Spin Rate", "Yield Type", "Yield Amount", "Particle Count",
-	 "Particle Color", "Fragment Type 1", "Fragment Type 2", "Fragment Count",
-	 "Explosion Type", "Mass"};
+	{"Strength", "Spin Rate", "Yield Type", "Yield Quantity", "Particles",
+	 "Particle Color", "Frag Type 1", "Frag Type 2", "Frag Count",
+	 "Explode Type", "Mass"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

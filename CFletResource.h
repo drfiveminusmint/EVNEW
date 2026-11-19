@@ -34,10 +34,10 @@ const int NUM_FLET_CONTROLS = 20;
 const int NUM_FLET_FIELDS = 18;
 
 const std::string g_szFletFields[NUM_FLET_FIELDS] =
-	{"Lead Ship Type", "Escort Type 1", "Escort Type 2", "Escort Type 3",
-	 "Escort Type 4", "Min Escort 1", "Min Escort 2", "Min Escort 3",
-	 "Min Escort 4", "Max Escort 1", "Max Escort 2", "Max Escort 3",
-	 "Max Escort 4", "Government", "System", "Appear On", "Hail Quote",
+	{"Lead Ship", "Ship 1", "Ship 2", "Ship 3",
+	 "Ship 4", "Min 1", "Min 2", "Min 3",
+	 "Min 4", "Max 1", "Max 2", "Max 3",
+	 "Max 4", "Govt", "Link System", "AppearOn", "Hail Quote",
 	 "Flags"};
 
 ////////////////////////////////////////////////////////////////

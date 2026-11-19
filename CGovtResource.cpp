@@ -267,8 +267,12 @@ int CGovtResource::SwapEndians(void)
 
 int CGovtResource::SaveToText(std::ostream & output, char delim)
 {
-	output << m_iVoiceType        << delim
-		   << m_iScanFine         << delim
+	output << m_iVoiceType        << delim;
+
+	PrintHex16Field(output, (char*)&m_iFlags1, delim);
+	PrintHex16Field(output, (char*)&m_iFlags2, delim);
+
+	output << m_iScanFine         << delim
 		   << m_iCrimeTolerance   << delim
 		   << m_iSmugglingPenalty << delim
 		   << m_iDisablingPenalty << delim
@@ -289,13 +293,14 @@ int CGovtResource::SaveToText(std::ostream & output, char delim)
 		   << m_iEnemies[1]       << delim
 		   << m_iEnemies[2]       << delim
 		   << m_iEnemies[3]       << delim
-		   << m_iInterface        << delim
-		   << m_iNewsPicture      << delim
 		   << m_iSkillMultiplier  << delim;
 
 	char c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
 
 	PrintHex16Field(output, m_cScanMask, delim);
+
+	PrintTextField(output, m_szCommName, delim);
+	PrintTextField(output, m_szTargetName, delim);
 
 	c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
 
@@ -311,11 +316,8 @@ int CGovtResource::SaveToText(std::ostream & output, char delim)
 	PrintHex32Field(output, (char *)&m_iColor,     delim);
 	PrintHex32Field(output, (char *)&m_iShipColor, delim);
 
-	PrintTextField(output, m_szCommName,   delim);
-	PrintTextField(output, m_szTargetName, delim);
-
-	PrintHex16Field(output, (char *)&m_iFlags1, delim);
-	PrintHex16Field(output, (char *)&m_iFlags2, delim);
+	output << m_iInterface << delim
+		   << m_iNewsPicture;
 
 	return 1;
 }
@@ -323,6 +325,10 @@ int CGovtResource::SaveToText(std::ostream & output, char delim)
 int CGovtResource::LoadFromText(std::istream & input, char delim)
 {
 	m_iVoiceType = ReadIntField(input, delim);
+
+	ReadHex16Field(input, (char*)&m_iFlags1);
+	ReadHex16Field(input, (char*)&m_iFlags2);
+
 	m_iScanFine = ReadIntField(input, delim);
 	m_iCrimeTolerance = ReadIntField(input, delim);
 	m_iSmugglingPenalty = ReadIntField(input, delim);
@@ -338,13 +344,14 @@ int CGovtResource::LoadFromText(std::istream & input, char delim)
 		m_iAllies[i] = ReadIntField(input, delim);
 	for (int i = 0; i < 4; i++)
 		m_iEnemies[i] = ReadIntField(input, delim);
-	m_iInterface = ReadIntField(input, delim);
-	m_iNewsPicture = ReadIntField(input, delim);
 	m_iSkillMultiplier = ReadIntField(input, delim);
 
 	ReadHex16Field(input, m_cScanMask);
 
 	char c = m_cScanMask[0]; m_cScanMask[0] = m_cScanMask[1]; m_cScanMask[1] = c;
+	
+	ReadTextField(input, m_szCommName,   16);
+	ReadTextField(input, m_szTargetName, 16);
 
 	ReadHex64Field(input, m_cRequire);
 
@@ -356,11 +363,8 @@ int CGovtResource::LoadFromText(std::istream & input, char delim)
 	ReadHex32Field(input, (char *)&m_iColor);
 	ReadHex32Field(input, (char *)&m_iShipColor);
 
-	ReadTextField(input, m_szCommName,   16);
-	ReadTextField(input, m_szTargetName, 16);
-
-	ReadHex16Field(input, (char *)&m_iFlags1);
-	ReadHex16Field(input, (char *)&m_iFlags2);
+	m_iInterface = ReadIntField(input, delim);
+	m_iNewsPicture = ReadIntField(input, '\n');
 
 	return 1;
 }

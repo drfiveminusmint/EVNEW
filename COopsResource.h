@@ -34,7 +34,7 @@ const int NUM_OOPS_CONTROLS = 8;
 const int NUM_OOPS_FIELDS = 6;
 
 const std::string g_szOopsFields[NUM_OOPS_FIELDS] =
-	{"Stellar", "Commodity", "Price Change", "Duration", "Random", "Active On"};
+	{"Stellar", "Commodity", "Price Change", "Duration", "Frequency", "ActivateOn"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

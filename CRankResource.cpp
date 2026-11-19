@@ -146,16 +146,15 @@ int CRankResource::SaveToText(std::ostream & output, char delim)
 {
 	output << m_iWeight     << delim
 		   << m_iGovernment << delim
+		   << m_iPriceMod   << delim
 		   << m_iSalary     << delim
-		   << m_iSalaryCap  << delim
-		   << m_iPriceMod   << delim;
-
-	PrintTextField(output, m_szConvName,  delim);
-	PrintTextField(output, m_szShortName, delim);
+		   << m_iSalaryCap  << delim;
 
 	PrintHex64Field(output, m_cContribute, delim);
-
 	PrintHex16Field(output, (char *)&m_iFlags, delim);
+
+	PrintTextField(output, m_szConvName, delim);
+	PrintTextField(output, m_szShortName, 0);
 
 	return 1;
 }
@@ -164,16 +163,16 @@ int CRankResource::LoadFromText(std::istream & input, char delim)
 {
 	m_iWeight = ReadIntField(input, delim);
 	m_iGovernment = ReadIntField(input, delim);
+	m_iPriceMod = ReadIntField(input, delim);
 	m_iSalary = ReadIntField(input, delim);
 	m_iSalaryCap = ReadIntField(input, delim);
-	m_iPriceMod = ReadIntField(input, delim);
+
+	ReadHex64Field(input, m_cContribute);
+	ReadHex16Field(input, (char*)&m_iFlags);
 
 	ReadTextField(input, m_szConvName,  64);
 	ReadTextField(input, m_szShortName, 64);
 
-	ReadHex64Field(input, m_cContribute);
-
-	ReadHex16Field(input, (char *)&m_iFlags);
 
 	return 1;
 }

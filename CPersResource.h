@@ -39,13 +39,13 @@ const std::string g_szPersAggressionChoices[NUM_PERS_AGGRESSION_CHOICES] =
 const int NUM_PERS_FIELDS = 32;
 
 const std::string g_szPersFields[NUM_PERS_FIELDS] =
-	{"System", "Government", "AI Type", "Aggression", "Cowardice", "Ship Type",
-	 "Credits", "Shield Mod", "Hail Picture", "Communication Quote",
-	 "Hail Quote", "Linked Mission", "Active On", "Grant Class", "Grant Count",
-	 "Grant Random", "Subtitle", "Color", "Weapon 1", "Weapon 2", "Weapon 3",
-	 "Weapon 4", "Weapon 1 Count", "Weapon 2 Count", "Weapon 3 Count",
-	 "Weapon 4 Count", "Weapon 1 Ammo", "Weapon 2 Ammo", "Weapon 3 Ammo",
-	 "Weapon 4 Ammo", "Flags 1", "Flags 2"};
+	{"Link System", "Govt", "AI Type", "Aggression", "Coward", "Ship Type",
+	 "Weapon 1", "Weapon 2", "Weapon 3", "Weapon 4", "Weapon 1 Count",
+	 "Weapon 2 Count", "Weapon 3 Count", "Weapon 4 Count", "Weapon 1 Ammo",
+	 "Weapon 2 Ammo", "Weapon 3 Ammo", "Weapon 4 Ammo",
+	 "Credits", "Shield Mod", "Hail Pict", "Comm Quote",
+	 "Hail Quote", "Link Mission", "Flags 1", "ActiveOn", "Grant Class", "Grant Count",
+	 "Grant Prob", "Subtitle", "Paint Color", "Flags 2"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

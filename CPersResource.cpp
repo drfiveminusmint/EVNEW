@@ -244,12 +244,26 @@ int CPersResource::SaveToText(std::ostream & output, char delim)
 		   << m_iAggressiveness << delim
 		   << m_iCowardice      << delim
 		   << m_iShipType       << delim
+		   << m_iWeaponTypes[0] << delim
+		   << m_iWeaponTypes[1] << delim
+		   << m_iWeaponTypes[2] << delim
+		   << m_iWeaponTypes[3] << delim
+		   << m_iWeaponCounts[0]<< delim
+		   << m_iWeaponCounts[1]<< delim
+		   << m_iWeaponCounts[2]<< delim
+		   << m_iWeaponCounts[3]<< delim
+		   << m_iWeaponAmmos[0] << delim
+		   << m_iWeaponAmmos[1] << delim
+		   << m_iWeaponAmmos[2] << delim
+		   << m_iWeaponAmmos[3] << delim
 		   << m_iCredits        << delim
 		   << m_iShieldMod      << delim
 		   << m_iHailPicture    << delim
 		   << m_iCommQuote      << delim
 		   << m_iHailQuote      << delim
 		   << m_iLinkedMission  << delim;
+
+	PrintHex16Field(output, (char*)&m_iFlags1, delim);
 
 	PrintTextField(output, m_szActiveOn, delim);
 
@@ -260,22 +274,7 @@ int CPersResource::SaveToText(std::ostream & output, char delim)
 	PrintTextField(output, m_szSubtitle, delim);
 
 	PrintHex32Field(output, (char *)&m_iColor, delim);
-
-	output << m_iWeaponTypes[0]  << delim
-		   << m_iWeaponTypes[1]  << delim
-		   << m_iWeaponTypes[2]  << delim
-		   << m_iWeaponTypes[3]  << delim
-		   << m_iWeaponCounts[0] << delim
-		   << m_iWeaponCounts[1] << delim
-		   << m_iWeaponCounts[2] << delim
-		   << m_iWeaponCounts[3] << delim
-		   << m_iWeaponAmmos[0]  << delim
-		   << m_iWeaponAmmos[1]  << delim
-		   << m_iWeaponAmmos[2]  << delim
-		   << m_iWeaponAmmos[3]  << delim;
-
-	PrintHex16Field(output, (char *)&m_iFlags1, delim);
-	PrintHex16Field(output, (char *)&m_iFlags2, delim);
+	PrintHex16Field(output, (char *)&m_iFlags2, 0);
 
 	return 1;
 }
@@ -288,12 +287,20 @@ int CPersResource::LoadFromText(std::istream & input, char delim)
 	m_iAggressiveness = ReadIntField(input, delim);
 	m_iCowardice = ReadIntField(input, delim);
 	m_iShipType = ReadIntField(input, delim);
+	for (int i = 0; i < 4; i++)
+		m_iWeaponTypes[i] = ReadIntField(input, delim);
+	for (int i = 0; i < 4; i++)
+		m_iWeaponCounts[i] = ReadIntField(input, delim);
+	for (int i = 0; i < 4; i++)
+		m_iWeaponAmmos[i] = ReadIntField(input, delim);
 	m_iCredits = ReadIntField(input, delim);
 	m_iShieldMod = ReadIntField(input, delim);
 	m_iHailPicture = ReadIntField(input, delim);
 	m_iCommQuote = ReadIntField(input, delim);
 	m_iHailQuote = ReadIntField(input, delim);
 	m_iLinkedMission = ReadIntField(input, delim);
+
+	ReadHex16Field(input, (char*)&m_iFlags1);
 
 	ReadTextField(input, m_szActiveOn, 256);
 
@@ -304,15 +311,6 @@ int CPersResource::LoadFromText(std::istream & input, char delim)
 	ReadTextField(input, m_szSubtitle, 64);
 
 	ReadHex32Field(input, (char *)&m_iColor);
-
-	for (int i = 0; i < 4; i++)
-		m_iWeaponTypes[i] = ReadIntField(input, delim);
-	for (int i = 0; i < 4; i++)
-		m_iWeaponCounts[i] = ReadIntField(input, delim);
-	for (int i = 0; i < 4; i++)
-		m_iWeaponAmmos[i] = ReadIntField(input, delim);
-
-	ReadHex16Field(input, (char *)&m_iFlags1);
 	ReadHex16Field(input, (char *)&m_iFlags2);
 
 	return 1;

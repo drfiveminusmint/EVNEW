@@ -34,7 +34,7 @@ const int NUM_DESC_CONTROLS = 8;
 const int NUM_DESC_FIELDS = 4;
 
 const std::string g_szDescFields[NUM_DESC_FIELDS] =
-	{"Text", "Graphics", "Movie File", "Flags"};
+	{"Description", "Graphic", "Movie Filename", "Flags"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

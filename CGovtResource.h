@@ -35,16 +35,15 @@ const int NUM_GOVT_CONTROLS = 62;
 const int NUM_GOVT_FIELDS = 38;
 
 const std::string g_szGovtFields[NUM_GOVT_FIELDS] =
-	{"Voice Type", "Scan Fine", "Crime Tolerance", "Smuggling Penalty",
-	 "Diabling Penalty", "Boarding Penalty", "Killing Penalty",
-	 "Shooting Penalty", "Initial Record", "Max Odds", "Class 1",
+	{"Voice Type", "Flags 1",
+	 "Flags 2", "Scan Fine", "Crime Tolerance", "Smuggle Penalty",
+	 "Diable Penalty", "Board Penalty", "Kill Penalty",
+	 "Shoot Penalty", "Initial Record", "Max Odds", "Class 1",
 	 "Class 2", "Class 3", "Class 4", "Ally 1", "Ally 2", "Ally 3",
-	 "Ally 4", "Enemy 1", "Enemy 2", "Enemy 3", "Enemy 4", "Interface",
-	 "News Picture", "Skill Multiplier", "Scan Mask", "Require Bits",
-	 "Inherent Jamming Type 1", "Inherent Jamming Type 2",
-	 "Inherent Jamming Type 3", "Inherent Jamming Type 4", "Medium Name",
-	 "Color", "Ship Color", "Communication Name", "Target Name", "Flags 1",
-	 "Flags 2"};
+	 "Ally 4", "Enemy 1", "Enemy 2", "Enemy 3", "Enemy 4", "Skill Multiplier",
+	 "Scan Mask", "Comm Name", "Target Code", "Require",
+	 "Jamming 1", "Jamming 2", "Jamming 3", "Jamming 4",
+	 "Medium Name", "Map Color", "Ship Paint", "Interface", "News Pict"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

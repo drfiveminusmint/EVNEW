@@ -341,8 +341,12 @@ int CWeapResource::SaveToText(std::ostream & output, char delim)
 		   << m_iImpact           << delim
 		   << m_iExplosionType    << delim
 		   << m_iProximityRadius  << delim
-		   << m_iBlastRadius      << delim
-		   << m_iSmokeSet         << delim
+		   << m_iBlastRadius      << delim;
+
+	PrintHex16Field(output, (char*)&m_iFlags1, delim);
+	PrintHex16Field(output, (char*)&m_iSeekerFlags, delim);
+
+	output << m_iSmokeSet         << delim
 		   << m_iDecay            << delim
 		   << m_iParticleCount    << delim
 		   << m_iParticleVelocity << delim
@@ -362,34 +366,36 @@ int CWeapResource::SaveToText(std::ostream & output, char delim)
 		   << m_iSubmunitionsType    << delim
 		   << m_iSubmunitionsAngle   << delim
 		   << m_iSubmunitionsLimit   << delim
-		   << m_iProximityDelay      << delim
-		   << m_iIonization          << delim
+		   << m_iProximityDelay      << delim;
+
+	PrintHex16Field(output, (char*)&m_iFlags2, delim);
+
+	output << m_iIonization          << delim
 		   << m_iHitParticleCount    << delim
 		   << m_iHitParticleLife     << delim
 		   << m_iHitParticleVelocity << delim;
 
 	PrintHex32Field(output, (char *)&m_iHitParticleColor, delim);
 
-	output << m_iExitType                << delim
+	output << m_iRecoil                  << delim
+		   << m_iExitType                << delim
 		   << m_iBurstCount              << delim
 		   << m_iBurstReload             << delim
 		   << m_iJammingVulnerability[0] << delim
 		   << m_iJammingVulnerability[1] << delim
 		   << m_iJammingVulnerability[2] << delim
-		   << m_iJammingVulnerability[3] << delim
-		   << m_iDurability              << delim
+		   << m_iJammingVulnerability[3] << delim;
+
+	PrintHex16Field(output, (char*)&m_iFlags3, delim);
+
+	output << m_iDurability              << delim
 		   << m_iGuidedTurnRate          << delim
 		   << m_iMaxAmmo                 << delim
-		   << m_iRecoil                  << delim
 		   << m_iLightningDensity        << delim
 		   << m_iLightningAmplitude      << delim;
 
-	PrintHex32Field(output, (char *)&m_iIonizationColor, delim);
+	PrintHex32Field(output, (char *)&m_iIonizationColor, 0);
 
-	PrintHex16Field(output, (char *)&m_iFlags1,      delim);
-	PrintHex16Field(output, (char *)&m_iFlags2,      delim);
-	PrintHex16Field(output, (char *)&m_iFlags3,      delim);
-	PrintHex16Field(output, (char *)&m_iSeekerFlags, delim);
 
 	return 1;
 }
@@ -410,6 +416,10 @@ int CWeapResource::LoadFromText(std::istream & input, char delim)
 	m_iExplosionType = ReadIntField(input, delim);
 	m_iProximityRadius = ReadIntField(input, delim);
 	m_iBlastRadius = ReadIntField(input, delim);
+
+	ReadHex16Field(input, (char*)&m_iFlags1);
+	ReadHex16Field(input, (char*)&m_iSeekerFlags);
+
 	m_iSmokeSet = ReadIntField(input, delim);
 	m_iDecay = ReadIntField(input, delim);
 	m_iParticleCount = ReadIntField(input, delim);
@@ -431,6 +441,9 @@ int CWeapResource::LoadFromText(std::istream & input, char delim)
 	m_iSubmunitionsAngle = ReadIntField(input, delim);
 	m_iSubmunitionsLimit = ReadIntField(input, delim);
 	m_iProximityDelay = ReadIntField(input, delim);
+
+	ReadHex16Field(input, (char*)&m_iFlags2);
+
 	m_iIonization = ReadIntField(input, delim);
 	m_iHitParticleCount = ReadIntField(input, delim);
 	m_iHitParticleLife = ReadIntField(input, delim);
@@ -438,24 +451,22 @@ int CWeapResource::LoadFromText(std::istream & input, char delim)
 
 	ReadHex32Field(input, (char *)&m_iHitParticleColor);
 
+	m_iRecoil = ReadIntField(input, delim);
 	m_iExitType = ReadIntField(input, delim);
 	m_iBurstCount = ReadIntField(input, delim);
 	m_iBurstReload = ReadIntField(input, delim);
 	for (int i = 0; i < 4; i++)
 		m_iJammingVulnerability[i] = ReadIntField(input, delim);
+
+	ReadHex16Field(input, (char*)&m_iFlags3);
+
 	m_iDurability = ReadIntField(input, delim);
 	m_iGuidedTurnRate = ReadIntField(input, delim);
 	m_iMaxAmmo = ReadIntField(input, delim);
-	m_iRecoil = ReadIntField(input, delim);
 	m_iLightningDensity = ReadIntField(input, delim);
 	m_iLightningAmplitude = ReadIntField(input, delim);
 
 	ReadHex32Field(input, (char *)&m_iIonizationColor);
-
-	ReadHex16Field(input, (char *)&m_iFlags1);
-	ReadHex16Field(input, (char *)&m_iFlags2);
-	ReadHex16Field(input, (char *)&m_iFlags3);
-	ReadHex16Field(input, (char *)&m_iSeekerFlags);
 
 	return 1;
 }

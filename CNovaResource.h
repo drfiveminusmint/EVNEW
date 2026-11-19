@@ -1,4 +1,4 @@
-// EVNEW - Escape Velocity: Nova Editor for Windows
+﻿// EVNEW - Escape Velocity: Nova Editor for Windows
 // By Adam Rosenfield
 // (c) 2003 All Rights Reserved
 
@@ -67,9 +67,13 @@ const std::string g_szResourceTypes[] = {"boom", "char", "cicn", "colr", "cron",
 										 "junk", "misn", "nebu", "oops", "outf", "pers", "pict", "rank", "rle8", "rleD",
 										 "roid", "shan", "ship", "snd",  "spin", "spob", "str",  "str#", "syst", "weap"};
 
-const std::string g_szMacResourceTypes[] = {"b��m", "ch�r", "cicn", "c�lr", "cr�n", "d�sc", "d�de", "fl�t", "g�vt", "�ntf",
-											"j�nk", "m�sn", "n�bu", "�ops", "o�tf", "p�rs", "PICT", "r�nk", "rl�8", "rl�D",
-											"r�id", "sh�n", "sh�p", "snd ", "sp�n", "sp�b", "STR ", "STR#", "s�st", "w�ap"};
+const std::string g_szResForgeResourceTypes[] = { "bööm", "chär", "cicn", "cölr", "crön", "dësc", "düde", "flët", "gövt", "ïntf",
+										 "jünk", "mïsn", "nëbu", "öops", "oütf", "përs", "PICT", "ränk", "rlë8", "rlëD",
+										 "röid", "shän", "shïp", "snd",  "spïn", "spöb", "STR",  "STR#", "sÿst", "wëap" };
+
+const std::string g_szMacResourceTypes[] = {"bššm", "chŠr", "cicn", "cšlr", "cršn", "d‘sc", "dŸde", "fl‘t", "gšvt", "•ntf",
+											"jŸnk", "m•sn", "n‘bu", "šops", "oŸtf", "p‘rs", "PICT", "rŠnk", "rl‘8", "rl‘D",
+											"ršid", "shŠn", "sh•p", "snd ", "sp•n", "spšb", "STR ", "STR#", "sØst", "w‘ap"};
 
 const int g_iResourceCanLoadSaveText[] = {1, 1, 0, 1, 1, 1, 1, 1, 1, 1,
 										  1, 1, 1, 1, 1, 1, 0, 1, 0, 0,

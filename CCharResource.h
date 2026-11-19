@@ -34,13 +34,14 @@ const int NUM_CHAR_CONTROLS = 33;
 const int NUM_CHAR_FIELDS = 31;
 
 const std::string g_szCharFields[NUM_CHAR_FIELDS] =
-	{"Cash", "Ship Type", "System 1", "System 2", "System 3", "System 4",
-	 "Government 1", "Status 1", "Government 2", "Status 2",
-	 "Government 3", "Status 3", "Government 4", "Status 4",
-	 "Combat Rating", "Intro Pict 1", "Intro Pict 2", "Intro Pict 3",
+	{"Starting Cash", "Ship Type",
+	 "System 1", "System 2", "System 3", "System 4",
+	 "Govt 1", "Govt 2", "Govt 3", "Govt 4",
+	 "Status 1", "Status 2", "Status 3", "Status 4",
+	 "Kills", "Intro Pict 1", "Intro Pict 2", "Intro Pict 3",
 	 "Intro Pict 4", "Pict Delay 1", "Pict Delay 2", "Pict Delay 3",
-	 "Pict Delay 4", "Intro Text", "On Start", "Start Day",
-	 "Start Month", "Start Year", "Date Prefix", "Date Suffix", "Flags"};
+	 "Pict Delay 4", "Intro Text", "OnStart", "Flags", "Start Day",
+	 "Start Month", "Start Year", "Date Prefix", "Date Suffix"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////

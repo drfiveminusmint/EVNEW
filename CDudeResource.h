@@ -34,15 +34,15 @@ const int NUM_DUDE_CONTROLS = 49;
 const int NUM_DUDE_FIELDS = 36;
 
 const std::string g_szDudeFields[NUM_DUDE_FIELDS] =
-	{"AI Type", "Government", "Ship 1", "Ship 2", "Ship 3", "Ship 4",
-	 "Ship 5", "Ship 6", "Ship 7", "Ship 8", "Ship 9", "Ship 10",
-	 "Ship 11", "Ship 12", "Ship 13", "Ship 14", "Ship 15", "Ship 16",
-	 "Probability 1", "Probability 2", "Probability 3",
-	 "Probability 4", "Probability 5", "Probability 6",
-	 "Probability 7", "Probability 8", "Probability 9",
-	 "Probability 10", "Probability 11", "Probability 12",
-	 "Probability 13", "Probability 14", "Probability 15",
-	 "Probability 16", "Flags", "Info Types"};
+	{"AI Type", "Govt", "Flags", "InfoTypes", "Ship 1", "Ship 2",
+	 "Ship 3", "Ship 4", "Ship 5", "Ship 6", "Ship 7", "Ship 8", "Ship 9",
+	 "Ship 10", "Ship 11", "Ship 12", "Ship 13", "Ship 14", "Ship 15", "Ship 16",
+	 "Ship 1 %", "Ship 2 %", "Ship 3 %",
+	 "Ship 4 %", "Ship 5 %", "Ship 6 %",
+	 "Ship 7 %", "Ship 8 %", "Ship 9 %",
+	 "Ship 10 %", "Ship 11 %", "Ship 12 %",
+	 "Ship 13 %", "Ship 14 %", "Ship 15 %",
+	 "Ship 16 %"};
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////////  CLASSES  //////////////////////////
